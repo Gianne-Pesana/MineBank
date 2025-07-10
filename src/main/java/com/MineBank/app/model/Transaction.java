@@ -4,22 +4,27 @@
  */
 package com.MineBank.app.model;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author giann
  */
-public class Transactions {
+public class Transaction {
+    public String accNum;
     public String ID;
     public String type;
     public double amount;
-    public String dateTime;
+    public LocalDateTime dateTime;
 
-    public Transactions(String ID, String type, double amount, String dateTime) {
+    public Transaction(String accNum, String ID, String type, double amount, LocalDateTime dateTim) {
+        this.accNum = accNum;
         this.ID = ID;
         this.type = type;
         this.amount = amount;
         this.dateTime = dateTime;
     }
+    
     
     
 }

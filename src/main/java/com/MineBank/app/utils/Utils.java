@@ -4,6 +4,7 @@
  */
 package com.MineBank.app.utils;
 
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,6 +12,10 @@ import javax.swing.JOptionPane;
  * @author giann
  */
 public class Utils {
+     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    
+    
     public static String toProperCase(String input) {
         input = input.trim();
         if(!input.contains(" ")) {

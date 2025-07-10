@@ -64,7 +64,7 @@ public class DashboardController {
         view.setAllButtonsEnabled(false);
         
         DepositView depositView = new DepositView();
-        DepositController depositController = new DepositController(user, depositView, repo);
+        DepositController depositController = new DepositController(user, depositView);
         
         // checks if the deposit view is closed
         depositView.addWindowListener(new WindowAdapter() {
