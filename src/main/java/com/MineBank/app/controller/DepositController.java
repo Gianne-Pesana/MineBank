@@ -10,6 +10,8 @@ import com.MineBank.app.repository.UserRepository;
 import com.MineBank.app.service.TransactionsService;
 import com.MineBank.app.view.DepositView;
 import com.MineBank.app.view.DisplaysUtils;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.IllegalFormatException;
 import javax.swing.JDialog;
@@ -73,16 +75,31 @@ public class DepositController {
     }
     
     private void createTransaction() {
-        TransactionsRepository repo = new TransactionsRepository(user, amountStr)
-        
-        Transaction transaction = new Transaction(
-                user.getAccNum(),
-                TransactionsService.generateTransactionID("DEPOSIT"),
-                "DEPOSIT",
-                amount,
-                LocalDateTime.now()
-        );
-        
-        
+        try {
+            TransactionsRepository repo = new TransactionsRepository("data\\transactions\\transactions.txt");
+
+            Transaction transaction = new Transaction(
+                    user.getAccNum(),
+                    TransactionsService.generateTransactionID("DEPOSIT"),
+                    "DEPOSIT",
+                    amount,
+                    LocalDateTime.now()
+            );
+
+            repo.saveTransaction(transaction);
+            System.out.println("Transaction successfully created.");
+            
+            
+            
+            
+
+        } catch (FileNotFoundException e) {
+            System.err.println("Error: Transaction file not found.");
+            e.printStackTrace(); // or show error dialog
+        } catch (IOException e) {
+            System.err.println("Error writing transaction to file.");
+            e.printStackTrace(); // or show error dialog
+        }
     }
+
 }

@@ -22,4 +22,8 @@ public class DisplaysUtils {
                 JOptionPane.ERROR_MESSAGE
         );
     }
+    
+    public static void showReceipt() {
+        
+    }
 }

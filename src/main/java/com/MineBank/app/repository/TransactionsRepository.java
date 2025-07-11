@@ -8,11 +8,10 @@ import com.MineBank.app.model.Transaction;
 import com.MineBank.app.model.User;
 import com.MineBank.app.utils.Utils;
 import com.MineBank.app.view.DisplaysUtils;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import javax.imageio.IIOException;
 
 /**
@@ -20,19 +19,32 @@ import javax.imageio.IIOException;
  * @author giann
  */
 public class TransactionsRepository {
-    private User user;
     private String filePath;
     
-    public TransactionsRepository(User user, String filePath) throws FileNotFoundException {
+    public TransactionsRepository(String filePath) throws FileNotFoundException {
         filePath = filePath.trim();
         File file = new File(filePath);
         if(!file.isFile()) {
             throw new FileNotFoundException("Error: Transactions file not found at: " + filePath);
         }
         
-        this.user = user;
         this.filePath = filePath;
         
+    }
+    
+    public void saveTransaction(Transaction transaction) throws IOException {
+        try (FileWriter outFile = new FileWriter(filePath)) {
+            outFile.append(
+                    transaction.accNum + "|" + 
+                    transaction.ID + "|" +
+                    transaction.type + "|" + 
+                    transaction.amount + "|" +
+                    transaction.dateTime.format(Utils.formatter)          
+            );
+            
+        } catch(IOException e) {
+            throw new IOException("Error: Failed to save transaction in path: " + filePath);
+        }
     }
     
     public void saveTransaction(String accNum, String ID, String type, double amount, LocalDateTime dateTime) throws IOException {
@@ -46,11 +58,52 @@ public class TransactionsRepository {
             );
             
         } catch(IOException e) {
-            throw new IOException("Error: Failed to save transactions in path: " + filePath);
+            throw new IOException("Error: Failed to save transaction in path: " + filePath);
         }
     }
     
-    public Transaction loadTransactions() {
+    public ArrayList<Transaction> loadAllTransactions() throws IOException {
+        ArrayList<Transaction> transactions = new ArrayList<>();
         
+        try (BufferedReader inFile = new BufferedReader(new FileReader(filePath))) {
+            int lineNum = 0;
+            String line;
+            
+            while ((line = inFile.readLine()) != null) {
+                lineNum++;
+                String parts[] = line.split("\\|");
+                
+                if(parts.length != 5) {
+                    System.out.println("Error: Invalid data.\n"
+                            + "Skipping line " + lineNum);
+                    continue;
+                }
+                
+                transactions.add(new Transaction(
+                        parts[0],   // accNum
+                        parts[1],   // ID
+                        parts[2],   // type
+                        Double.parseDouble(parts[3]), // amount
+                        LocalDateTime.parse(parts[4], Utils.formatter)
+                    )
+                );
+            }
+        } catch(IOException e) {
+            throw new IOException("Error: Failed to load all transactions in path: " + filePath);
+        }
+        
+        return transactions;
+    }
+    
+    public ArrayList<Transaction> getUserTransactions(String accNum) throws IOException{
+        ArrayList<Transaction> userTransactions = new ArrayList<>();
+        
+        for (Transaction transaction : loadAllTransactions()) {
+            if(accNum.equals(transaction.accNum)) {
+                userTransactions.add(transaction);
+            }
+        }
+        
+        return userTransactions;
     }
 }
