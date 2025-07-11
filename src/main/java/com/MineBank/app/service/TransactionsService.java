@@ -13,6 +13,6 @@ import java.util.UUID;
 public class TransactionsService {
     public static String generateTransactionID(String transactionType) {
         String prefix = transactionType.equals("DEPOSIT") ? "DPS" : "WDR";
-        return prefix + UUID.randomUUID().toString();
+        return prefix + "-" + UUID.randomUUID().toString().replace("-", "").substring(0, 10);
     }
 }

@@ -7,10 +7,14 @@ package com.MineBank.app.repository;
 import com.MineBank.app.UserAccStatus;
 import java.util.ArrayList;
 import com.MineBank.app.model.User;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import javax.imageio.stream.FileCacheImageInputStream;
 
 
 /**
@@ -19,6 +23,7 @@ import java.util.Scanner;
  */
 public class UserRepository {
     private static String filepath;
+    private static String tempFilePath = "data\\transactions\\temp.txt";
 
     public UserRepository(String filepath) {
         this.filepath = filepath;
@@ -72,4 +77,54 @@ public class UserRepository {
         return null;
     }
     
+    public void updateUser(User user) {
+        // copy data to temp file
+        try(
+            BufferedReader inFile = new BufferedReader(new FileReader(filepath));
+            FileWriter tempWriter = new FileWriter(tempFilePath)
+        ) {
+            String line;
+            
+            while((line = inFile.readLine()) != null) {
+                tempWriter.append(line).append("\n");
+            }
+            
+            tempWriter.close();
+        } catch (IOException tempFileException) {
+            System.out.println("Error: Failed to copy data to temp file.");
+        }
+        
+            
+        // writes updated data
+        try(
+            BufferedReader inTempFile = new BufferedReader(new FileReader(tempFilePath));
+            FileWriter outFile = new FileWriter(filepath);   
+        ) {
+            String line;
+            while((line = inTempFile.readLine()) != null) {
+                String parts[] = line.split("\\|");
+                
+                if(parts[0].equals(user.getAccNum())) {
+                    outFile.append(formatToFile(user) + "\n");
+                } else {
+                    outFile.append(line).append("\n");
+                }
+            }
+            
+        } catch (IOException updateFileException) {
+            System.out.println("Error: Failed to update user data.");
+            return;
+        }
+        
+        // clears temp file
+        new File(tempFilePath).delete();
+    }
+    
+    private String formatToFile(User user) {
+        return user.getAccNum() + "|" + user.getUsername() + "|" +
+               user.getPassword() + "|" + user.getFirstName() + "|" +
+               user.getLastName() + "|" + user.getAge() + "|" +
+               user.getBalance() + "|" + user.getStatus() + "|" +
+               user.getProfileImage();
+    }
 }

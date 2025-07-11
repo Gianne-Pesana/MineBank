@@ -38,7 +38,7 @@ public class LoginController {
             User user = authService.authUser(username, password, this.repo);
             DashboardView dashView = new DashboardView();
             DashboardController dashController = new DashboardController(user, dashView, repo);
-            dashView.setController(dashController);
+            dashView.setLocationRelativeTo(view);
             view.dispose();
             dashController.handleDashboard();
             

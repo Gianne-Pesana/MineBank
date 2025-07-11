@@ -35,28 +35,27 @@ public class DashboardController {
             throw new AuthenticationException("User not found!");
         
         
-        Image scaledImage = new ImageIcon(user.getProfileImage()).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-        ImageIcon profileImage = new ImageIcon(scaledImage);
+        
 
-        this.view.renderHeader(user.getFullName(), user.getAccNum(), profileImage);
+        this.view.renderHeader(user);
         this.view.setVisible(true);
         
         handleButtons();
     }
     
     private void handleButtons() {
-        view.setViewBalanceBtnAction(e -> showViewBalanceFrame());
-        view.setViewTransactionBtnAction(e -> showViewTransactionsFrame());
+        view.setTransactionHistoryBtnAction(e -> showTransactionHistoryFrame());
+        view.setMoneyTransferBtnAction(e -> showMoneyTransferFrame());
         view.setDepositBtnAction(e -> showDepositFrame());
         view.setWithdrawBtnAction(e -> showWithdrawFrame());
     }
     
-    private void showViewBalanceFrame() {
-        System.out.println("View balance btn clicked");
+    private void showTransactionHistoryFrame() {
+        System.out.println("Transaction History Btn Clicked");
     }
     
-    private void showViewTransactionsFrame() {
-        System.out.println("View Transactions btn clicked");
+    private void showMoneyTransferFrame() {
+        System.out.println("Money Transfer Btn Clicked");
     }
     
     private void showDepositFrame() {
@@ -64,7 +63,9 @@ public class DashboardController {
         view.setAllButtonsEnabled(false);
         
         DepositView depositView = new DepositView();
-        DepositController depositController = new DepositController(user, depositView);
+        depositView.setLocationRelativeTo(view);
+        
+        DepositController depositController = new DepositController(user, depositView, repo);
         
         // checks if the deposit view is closed
         depositView.addWindowListener(new WindowAdapter() {
@@ -72,6 +73,7 @@ public class DashboardController {
             public void windowClosed(WindowEvent e) {
                 view.setVisible(true);
                 view.setAllButtonsEnabled(true);
+                updateUserInfo(depositController.user);
             }
         });
         
@@ -82,5 +84,10 @@ public class DashboardController {
     
     private void showWithdrawFrame() {
         System.out.println("Withdraw btn clicked");
+    }
+    
+    private void updateUserInfo(User updatedUser) {
+        this.user = updatedUser;
+        view.renderHeader(user);
     }
 }

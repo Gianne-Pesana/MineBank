@@ -17,7 +17,7 @@ public class Transaction {
     public double amount;
     public LocalDateTime dateTime;
 
-    public Transaction(String accNum, String ID, String type, double amount, LocalDateTime dateTim) {
+    public Transaction(String accNum, String ID, String type, double amount, LocalDateTime dateTime) {
         this.accNum = accNum;
         this.ID = ID;
         this.type = type;

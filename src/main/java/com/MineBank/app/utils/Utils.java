@@ -12,7 +12,9 @@ import javax.swing.JOptionPane;
  * @author giann
  */
 public class Utils {
-     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+     public static final DateTimeFormatter yyyy_MM_dd = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+     public static final DateTimeFormatter MMMM_dd_yy = DateTimeFormatter.ofPattern("MMMM dd, yyyy hh:mm a");
+
 
     
     

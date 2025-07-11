@@ -4,6 +4,15 @@
  */
 package com.MineBank.app.view;
 
+import com.MineBank.app.model.Transaction;
+import com.MineBank.app.utils.Utils;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author giann
@@ -18,6 +27,9 @@ public class ReceiptModal extends javax.swing.JDialog {
     public ReceiptModal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        renderConfirmIcon();
+        setLocationRelativeTo(parent);
+        setAlwaysOnTop(true);
     }
 
     /**
@@ -31,50 +43,305 @@ public class ReceiptModal extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        confirmedIcon = new javax.swing.JLabel();
+        transactionHeader = new javax.swing.JLabel();
+        depositAmountHeader = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        accNumText = new javax.swing.JLabel();
+        accNumValue = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        transactionIDText = new javax.swing.JLabel();
+        transactionIDValue = new javax.swing.JLabel();
+        dateTimeText = new javax.swing.JPanel();
+        transactionIDText1 = new javax.swing.JLabel();
+        dateTimeValue = new javax.swing.JLabel();
+        dateTimeText1 = new javax.swing.JPanel();
+        transactionIDText2 = new javax.swing.JLabel();
+        depositAmountFooter = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        dateTimeText2 = new javax.swing.JPanel();
+        transactionIDText3 = new javax.swing.JLabel();
+        transactionTypeValue = new javax.swing.JLabel();
+        homeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setModal(true);
 
-        jPanel1.setBackground(new java.awt.Color(227, 229, 235));
+        jPanel1.setBackground(new java.awt.Color(222, 227, 232));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 0, true));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
 
+        confirmedIcon.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        transactionHeader.setBackground(new java.awt.Color(86, 86, 86));
+        transactionHeader.setFont(new java.awt.Font("Minecraft", 0, 16)); // NOI18N
+        transactionHeader.setForeground(new java.awt.Color(108, 108, 108));
+        transactionHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        transactionHeader.setText("<transaction> Success!");
+
+        depositAmountHeader.setFont(new java.awt.Font("Minecraft Evenings", 0, 32)); // NOI18N
+        depositAmountHeader.setForeground(new java.awt.Color(0, 0, 0));
+        depositAmountHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        depositAmountHeader.setText("EMD 1,234,567.89");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(transactionHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(depositAmountHeader, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(180, 180, 180)
+                .addComponent(confirmedIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 140, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(confirmedIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(transactionHeader)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(depositAmountHeader)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo/minebank-transparent-60px.png"))); // NOI18N
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setFont(new java.awt.Font("Minecraft", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Payment Details");
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        accNumText.setBackground(new java.awt.Color(255, 255, 255));
+        accNumText.setFont(new java.awt.Font("Minecraft", 0, 14)); // NOI18N
+        accNumText.setForeground(new java.awt.Color(72, 72, 72));
+        accNumText.setText("Account Number");
+
+        accNumValue.setFont(new java.awt.Font("Minecraft", 0, 14)); // NOI18N
+        accNumValue.setForeground(new java.awt.Color(0, 0, 0));
+        accNumValue.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        accNumValue.setText("<null>");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(accNumText, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(accNumValue, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(accNumText)
+                    .addComponent(accNumValue))
+                .addGap(0, 0, 0))
+        );
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        transactionIDText.setBackground(new java.awt.Color(255, 255, 255));
+        transactionIDText.setFont(new java.awt.Font("Minecraft", 0, 14)); // NOI18N
+        transactionIDText.setForeground(new java.awt.Color(72, 72, 72));
+        transactionIDText.setText("Reference Number");
+
+        transactionIDValue.setFont(new java.awt.Font("Minecraft", 0, 14)); // NOI18N
+        transactionIDValue.setForeground(new java.awt.Color(0, 0, 0));
+        transactionIDValue.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        transactionIDValue.setText("<null>");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(transactionIDText, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(transactionIDValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(transactionIDText)
+                    .addComponent(transactionIDValue))
+                .addGap(0, 0, 0))
+        );
+
+        dateTimeText.setBackground(new java.awt.Color(255, 255, 255));
+
+        transactionIDText1.setBackground(new java.awt.Color(255, 255, 255));
+        transactionIDText1.setFont(new java.awt.Font("Minecraft", 0, 14)); // NOI18N
+        transactionIDText1.setForeground(new java.awt.Color(72, 72, 72));
+        transactionIDText1.setText("Time");
+
+        dateTimeValue.setFont(new java.awt.Font("Minecraft", 0, 14)); // NOI18N
+        dateTimeValue.setForeground(new java.awt.Color(0, 0, 0));
+        dateTimeValue.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        dateTimeValue.setText("<null>");
+
+        javax.swing.GroupLayout dateTimeTextLayout = new javax.swing.GroupLayout(dateTimeText);
+        dateTimeText.setLayout(dateTimeTextLayout);
+        dateTimeTextLayout.setHorizontalGroup(
+            dateTimeTextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dateTimeTextLayout.createSequentialGroup()
+                .addComponent(transactionIDText1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(dateTimeValue, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        dateTimeTextLayout.setVerticalGroup(
+            dateTimeTextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dateTimeTextLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(dateTimeTextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(transactionIDText1)
+                    .addComponent(dateTimeValue))
+                .addGap(0, 0, 0))
+        );
+
+        dateTimeText1.setBackground(new java.awt.Color(255, 255, 255));
+
+        transactionIDText2.setBackground(new java.awt.Color(255, 255, 255));
+        transactionIDText2.setFont(new java.awt.Font("Minecraft", 0, 14)); // NOI18N
+        transactionIDText2.setForeground(new java.awt.Color(72, 72, 72));
+        transactionIDText2.setText("Total");
+
+        depositAmountFooter.setFont(new java.awt.Font("Minecraft", 0, 16)); // NOI18N
+        depositAmountFooter.setForeground(new java.awt.Color(0, 0, 0));
+        depositAmountFooter.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        depositAmountFooter.setText("<null>");
+
+        javax.swing.GroupLayout dateTimeText1Layout = new javax.swing.GroupLayout(dateTimeText1);
+        dateTimeText1.setLayout(dateTimeText1Layout);
+        dateTimeText1Layout.setHorizontalGroup(
+            dateTimeText1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dateTimeText1Layout.createSequentialGroup()
+                .addComponent(transactionIDText2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(depositAmountFooter, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        dateTimeText1Layout.setVerticalGroup(
+            dateTimeText1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dateTimeText1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(dateTimeText1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(transactionIDText2)
+                    .addComponent(depositAmountFooter))
+                .addGap(0, 0, 0))
+        );
+
+        dateTimeText2.setBackground(new java.awt.Color(255, 255, 255));
+
+        transactionIDText3.setBackground(new java.awt.Color(255, 255, 255));
+        transactionIDText3.setFont(new java.awt.Font("Minecraft", 0, 14)); // NOI18N
+        transactionIDText3.setForeground(new java.awt.Color(72, 72, 72));
+        transactionIDText3.setText("Transaction Type");
+
+        transactionTypeValue.setFont(new java.awt.Font("Minecraft", 0, 14)); // NOI18N
+        transactionTypeValue.setForeground(new java.awt.Color(0, 0, 0));
+        transactionTypeValue.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        transactionTypeValue.setText("<null>");
+
+        javax.swing.GroupLayout dateTimeText2Layout = new javax.swing.GroupLayout(dateTimeText2);
+        dateTimeText2.setLayout(dateTimeText2Layout);
+        dateTimeText2Layout.setHorizontalGroup(
+            dateTimeText2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dateTimeText2Layout.createSequentialGroup()
+                .addComponent(transactionIDText3, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(transactionTypeValue, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        dateTimeText2Layout.setVerticalGroup(
+            dateTimeText2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dateTimeText2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(dateTimeText2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(transactionIDText3)
+                    .addComponent(transactionTypeValue))
+                .addGap(0, 0, 0))
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dateTimeText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dateTimeText1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1)
+                    .addComponent(dateTimeText2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(dateTimeText2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(dateTimeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dateTimeText1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+
+        homeButton.setBackground(new java.awt.Color(204, 213, 174));
+        homeButton.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
+        homeButton.setForeground(new java.awt.Color(64, 64, 64));
+        homeButton.setText("Back to Home");
+        homeButton.setFocusPainted(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(166, 166, 166)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(20, 20, 20)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(338, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -94,6 +361,35 @@ public class ReceiptModal extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
+    
+    public void showReceipt(Transaction transaction) {        
+        transactionHeader.setText(Utils.toProperCase(transaction.type) + "Success!");
+        depositAmountHeader.setText("EMD " + transaction.amount);
+        accNumValue.setText(transaction.accNum);
+        transactionIDValue.setText(transaction.ID);
+        transactionTypeValue.setText(Utils.toProperCase(transaction.type));
+        dateTimeValue.setText(transaction.dateTime.format(Utils.MMMM_dd_yy));
+        depositAmountFooter.setText(String.valueOf(transaction.amount));
+        setVisible(true);
+    }
+    
+    private void renderConfirmIcon() {
+        int width = confirmedIcon.getWidth() - 5;
+        int height = confirmedIcon.getHeight() - 5;
+        
+        FlatSVGIcon icon = new FlatSVGIcon("icons/check-circle.svg", width, height);
+        confirmedIcon.setIcon(icon);
+        confirmedIcon.setBorder(BorderFactory.createEmptyBorder());
+
+        // Optional: set foreground for color if your SVG uses currentColor
+        confirmedIcon.setForeground(new java.awt.Color(0, 128, 0)); // green
+    }
+    
+    public void setHomeBtnAction(ActionListener listener) {
+        homeButton.addActionListener(listener);
+    }
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -129,8 +425,29 @@ public class ReceiptModal extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel accNumText;
+    private javax.swing.JLabel accNumValue;
+    private javax.swing.JLabel confirmedIcon;
+    private javax.swing.JPanel dateTimeText;
+    private javax.swing.JPanel dateTimeText1;
+    private javax.swing.JPanel dateTimeText2;
+    private javax.swing.JLabel dateTimeValue;
+    private javax.swing.JLabel depositAmountFooter;
+    private javax.swing.JLabel depositAmountHeader;
+    private javax.swing.JButton homeButton;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel transactionHeader;
+    private javax.swing.JLabel transactionIDText;
+    private javax.swing.JLabel transactionIDText1;
+    private javax.swing.JLabel transactionIDText2;
+    private javax.swing.JLabel transactionIDText3;
+    private javax.swing.JLabel transactionIDValue;
+    private javax.swing.JLabel transactionTypeValue;
     // End of variables declaration//GEN-END:variables
 }

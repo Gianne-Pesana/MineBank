@@ -33,14 +33,16 @@ public class TransactionsRepository {
     }
     
     public void saveTransaction(Transaction transaction) throws IOException {
-        try (FileWriter outFile = new FileWriter(filePath)) {
+        try (FileWriter outFile = new FileWriter(filePath, true)) {
             outFile.append(
                     transaction.accNum + "|" + 
                     transaction.ID + "|" +
                     transaction.type + "|" + 
                     transaction.amount + "|" +
-                    transaction.dateTime.format(Utils.formatter)          
+                    transaction.dateTime.format(Utils.yyyy_MM_dd)
             );
+            
+            outFile.append("\n");
             
         } catch(IOException e) {
             throw new IOException("Error: Failed to save transaction in path: " + filePath);
@@ -54,7 +56,7 @@ public class TransactionsRepository {
                     ID + "|" +
                     type + "|" + 
                     amount + "|" +
-                    dateTime.format(Utils.formatter)          
+                    dateTime.format(Utils.yyyy_MM_dd)          
             );
             
         } catch(IOException e) {
@@ -84,7 +86,7 @@ public class TransactionsRepository {
                         parts[1],   // ID
                         parts[2],   // type
                         Double.parseDouble(parts[3]), // amount
-                        LocalDateTime.parse(parts[4], Utils.formatter)
+                        LocalDateTime.parse(parts[4], Utils.yyyy_MM_dd)
                     )
                 );
             }

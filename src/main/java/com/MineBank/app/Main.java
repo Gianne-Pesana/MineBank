@@ -4,25 +4,20 @@
 
 package com.MineBank.app;
 
-import com.MineBank.app.view.LoginView;
-import com.MineBank.app.repository.UserRepository;
-import com.MineBank.app.controller.LoginController;
+import com.MineBank.app.view.*;
+import com.MineBank.app.repository.*;
+import com.MineBank.app.controller.*;
 import java.util.*;
 /**
  *
  * @author giann
  */
 public class Main {
-    public static void main(String[] args) {
-//        new DepositView().setVisible(true);
-        
+    public static void main(String[] args) {  
         String path = "data\\user\\userData.txt";
         LoginController loginController = new LoginController(
                 new LoginView(), 
                 new UserRepository(path));
         loginController.init();
-
-        
-//        new LoginPage().setVisible(true);
     }
 }
