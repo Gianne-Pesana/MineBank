@@ -8,31 +8,22 @@ import com.MineBank.app.model.User;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.JTextField;
 
 /**
  *
  * @author giann
  */
-public class DepositView extends javax.swing.JFrame {
+public class WithdrawView extends javax.swing.JFrame {
+    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(WithdrawView.class.getName());
 
     /**
-     * Creates new form DepositView
+     * Creates new form WithdrawView
      */
-    public DepositView() {
+    public WithdrawView() {
         initComponents();
         processInput();
-        setLocationRelativeTo(null);
-        
-//        addWindowListener(new WindowAdapter() {
-//            @Override
-//            public void windowClosing(WindowEvent e) {
-//                dashboard.setVisible(true);
-//                dispose();
-//            }
-//        });
     }
 
     /**
@@ -44,7 +35,6 @@ public class DepositView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         amountField = new javax.swing.JTextField();
@@ -52,14 +42,10 @@ public class DepositView extends javax.swing.JFrame {
         balanceLabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        depositBtn = new javax.swing.JButton();
+        withdrawBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
 
-        jLabel2.setText("jLabel2");
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Deposit");
-        setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 250, 239));
         jPanel1.setPreferredSize(new java.awt.Dimension(460, 520));
@@ -68,8 +54,8 @@ public class DepositView extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("minecrafter", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/money-bag-36px.png"))); // NOI18N
-        jLabel1.setText("DEPOSIT");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/income-36px.png"))); // NOI18N
+        jLabel1.setText("Withdraw");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         amountField.setBackground(new java.awt.Color(255, 250, 239));
@@ -99,14 +85,14 @@ public class DepositView extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(91, 91, 91));
         jLabel5.setText("Amount:");
 
-        depositBtn.setBackground(new java.awt.Color(204, 213, 174));
-        depositBtn.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
-        depositBtn.setForeground(new java.awt.Color(30, 30, 30));
-        depositBtn.setText("Deposit");
-        depositBtn.setMargin(new java.awt.Insets(6, 14, 3, 14));
-        depositBtn.addActionListener(new java.awt.event.ActionListener() {
+        withdrawBtn.setBackground(new java.awt.Color(204, 213, 174));
+        withdrawBtn.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
+        withdrawBtn.setForeground(new java.awt.Color(30, 30, 30));
+        withdrawBtn.setText("Withdraw");
+        withdrawBtn.setMargin(new java.awt.Insets(6, 14, 3, 14));
+        withdrawBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                depositBtnActionPerformed(evt);
+                withdrawBtnActionPerformed(evt);
             }
         });
 
@@ -128,7 +114,6 @@ public class DepositView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(accNumLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(balanceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -138,12 +123,13 @@ public class DepositView extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(depositBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(withdrawBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 191, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -163,7 +149,7 @@ public class DepositView extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(depositBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(withdrawBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -183,17 +169,26 @@ public class DepositView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void amountFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amountFieldActionPerformed
-        depositBtn.doClick();
+        withdrawBtn.doClick();
     }//GEN-LAST:event_amountFieldActionPerformed
 
-    private void depositBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositBtnActionPerformed
+    private void withdrawBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdrawBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_depositBtnActionPerformed
+    }//GEN-LAST:event_withdrawBtnActionPerformed
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelBtnActionPerformed
 
+    
+    public void setWithdrawBtnAction(ActionListener listener) {
+        withdrawBtn.addActionListener(listener);
+    }
+    
+    public void setCancelBtnAction(ActionListener listener) {
+        cancelBtn.addActionListener(listener);
+    }
+    
     // block non-number cgaracters
     private void processInput() {
         amountField.addKeyListener(new KeyAdapter() {
@@ -213,24 +208,16 @@ public class DepositView extends javax.swing.JFrame {
         });
     }
     
-    public String getInputAmountStr() {
-        return amountField.getText().trim();
-    }
-    
-    public void setDepositBtnAction (ActionListener listener) {
-        depositBtn.addActionListener(listener);
-    }
-    
-    public void setCancelBtnAction (ActionListener listener) {
-        cancelBtn.addActionListener(listener);
-    }
-    
     public void renderUserInfo(User user) {
         accNumLabel.setText("Account Number: " + user.getAccNum());
         balanceLabel.setText("Balance: " + user.getBalance() + " emeralds");
     }
     
-    /**8
+    public String getInputAmountStr() {
+        return amountField.getText().trim();
+    }
+    
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -246,23 +233,13 @@ public class DepositView extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DepositView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DepositView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DepositView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DepositView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DepositView().setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> new WithdrawView().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -270,11 +247,10 @@ public class DepositView extends javax.swing.JFrame {
     private javax.swing.JTextField amountField;
     private javax.swing.JLabel balanceLabel;
     private javax.swing.JButton cancelBtn;
-    private javax.swing.JButton depositBtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton withdrawBtn;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,7 +15,9 @@ import java.util.*;
  * @author giann
  */
 public class AuthService {
-   
+    // user related logic that supports the controller
+    
+    
     public User authUser(String username, String password, UserRepository repo) throws AuthenticationException {
         User user = repo.findUsername(username);
         // check user exists and incorrect password

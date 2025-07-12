@@ -117,7 +117,7 @@ public class ReceiptModal extends javax.swing.JDialog {
 
         jLabel3.setFont(new java.awt.Font("Minecraft", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Payment Details");
+        jLabel3.setText("Transaction Details");
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -363,13 +363,13 @@ public class ReceiptModal extends javax.swing.JDialog {
      */
     
     public void showReceipt(Transaction transaction) {        
-        transactionHeader.setText(Utils.toProperCase(transaction.type) + "Success!");
-        depositAmountHeader.setText("EMD " + transaction.amount);
-        accNumValue.setText(transaction.accNum);
-        transactionIDValue.setText(transaction.ID);
-        transactionTypeValue.setText(Utils.toProperCase(transaction.type));
+        transactionHeader.setText(Utils.toProperCase(transaction.getTypeStr()) + " Success!");
+        depositAmountHeader.setText("EMD " + transaction.getAmount());
+        accNumValue.setText(transaction.getAccNum());
+        transactionIDValue.setText(transaction.getID());
+        transactionTypeValue.setText(Utils.toProperCase(transaction.getTypeStr()));
         dateTimeValue.setText(transaction.dateTime.format(Utils.MMMM_dd_yy));
-        depositAmountFooter.setText(String.valueOf(transaction.amount));
+        depositAmountFooter.setText(String.valueOf(transaction.getAmount()));
         setVisible(true);
     }
     

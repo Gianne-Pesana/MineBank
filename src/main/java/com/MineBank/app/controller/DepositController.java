@@ -5,12 +5,9 @@
 package com.MineBank.app.controller;
 
 import com.MineBank.app.model.*;
-import com.MineBank.app.repository.TransactionsRepository;
-import com.MineBank.app.repository.UserRepository;
+import com.MineBank.app.repository.*;
 import com.MineBank.app.service.TransactionsService;
-import com.MineBank.app.view.DepositView;
-import com.MineBank.app.view.DisplaysUtils;
-import com.MineBank.app.view.ReceiptModal;
+import com.MineBank.app.view.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
@@ -80,12 +77,12 @@ public class DepositController {
     
     private void createTransaction() {
         try {
-            TransactionsRepository repo = new TransactionsRepository("data\\transactions\\transactions.txt");
+            TransactionsRepository repo = new TransactionsRepository();
 
             transaction = new Transaction(
                     user.getAccNum(),
-                    TransactionsService.generateTransactionID("DEPOSIT"),
-                    "DEPOSIT",
+                    TransactionsService.generateTransactionID(Transaction.DEPOSIT),
+                    Transaction.DEPOSIT,
                     amount,
                     LocalDateTime.now()
             );

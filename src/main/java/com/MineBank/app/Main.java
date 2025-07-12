@@ -13,6 +13,7 @@ import java.util.*;
  * @author giann
  */
 public class Main {
+    // MAIN
     public static void main(String[] args) {  
         String path = "data\\user\\userData.txt";
         LoginController loginController = new LoginController(

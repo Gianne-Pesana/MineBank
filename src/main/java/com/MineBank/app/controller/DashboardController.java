@@ -4,21 +4,18 @@
  */
 package com.MineBank.app.controller;
 
-import com.MineBank.app.*;
 import com.MineBank.app.exceptions.AuthenticationException;
 import com.MineBank.app.model.*;
 import com.MineBank.app.repository.*;
-import com.MineBank.app.utils.Utils;
 import com.MineBank.app.view.*;
-import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.ImageIcon;
+
 
 /**
  *
  * @author giann
- */
+☺ */
 public class DashboardController {
     private User user;
     private DashboardView view;
@@ -83,7 +80,25 @@ public class DashboardController {
     
     
     private void showWithdrawFrame() {
-        System.out.println("Withdraw btn clicked");
+        // prevents spamming
+        view.setAllButtonsEnabled(false);
+        
+        WithdrawView withdrawView = new WithdrawView();
+        withdrawView.setLocationRelativeTo(view);
+        
+        WithdrawController withdrawController = new WithdrawController(user, withdrawView, repo);
+        
+        withdrawView.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                view.setVisible(true);
+                view.setAllButtonsEnabled(true);
+                updateUserInfo(user);
+            }
+        });
+        
+        view.setVisible(false);
+        withdrawController.init();
     }
     
     private void updateUserInfo(User updatedUser) {

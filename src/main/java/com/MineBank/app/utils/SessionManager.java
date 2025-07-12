@@ -10,8 +10,9 @@ package com.MineBank.app.utils;
  */
 import java.security.SecureRandom;
 
-public class SessionManager {
 
+// no longer used
+public class SessionManager {
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private static final int ID_LENGTH = 20;
     private static final SecureRandom random = new SecureRandom();

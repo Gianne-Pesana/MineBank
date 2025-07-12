@@ -5,14 +5,10 @@
 package com.MineBank.app.repository;
 
 import com.MineBank.app.model.Transaction;
-import com.MineBank.app.model.User;
 import com.MineBank.app.utils.Utils;
-import com.MineBank.app.view.DisplaysUtils;
 import java.io.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import javax.imageio.IIOException;
 
 /**
  *
@@ -20,6 +16,10 @@ import javax.imageio.IIOException;
  */
 public class TransactionsRepository {
     private String filePath;
+    
+    public TransactionsRepository() {
+        filePath = "data\\transactions\\transactions.txt";
+    }
     
     public TransactionsRepository(String filePath) throws FileNotFoundException {
         filePath = filePath.trim();
@@ -84,7 +84,7 @@ public class TransactionsRepository {
                 transactions.add(new Transaction(
                         parts[0],   // accNum
                         parts[1],   // ID
-                        parts[2],   // type
+                        Integer.parseInt(parts[2]),   // type
                         Double.parseDouble(parts[3]), // amount
                         LocalDateTime.parse(parts[4], Utils.yyyy_MM_dd)
                     )
