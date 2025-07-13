@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import com.MineBank.app.Enums.*;
 
 /**
  *
@@ -81,8 +82,8 @@ public class DepositController {
 
             transaction = new Transaction(
                     user.getAccNum(),
-                    TransactionsService.generateTransactionID(Transaction.DEPOSIT),
-                    Transaction.DEPOSIT,
+                    TransactionsService.generateTransactionID(TransactionType.DEPOSIT),
+                    TransactionType.DEPOSIT,
                     amount,
                     LocalDateTime.now()
             );

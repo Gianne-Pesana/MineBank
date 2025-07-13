@@ -4,6 +4,7 @@
  */
 package com.MineBank.app.model;
 
+import com.MineBank.app.Enums.TransactionType;
 import java.time.LocalDateTime;
 
 /**
@@ -13,16 +14,14 @@ import java.time.LocalDateTime;
 
 // POJO
 public class Transaction {
-    public static final int DEPOSIT = 0;
-    public static final int WITHDRAW = 1;
     
     public String accNum;
     public String ID;
-    public int type;
+    public TransactionType type;
     public double amount;
     public LocalDateTime dateTime;
 
-    public Transaction(String accNum, String ID, int type, double amount, LocalDateTime dateTime) {
+    public Transaction(String accNum, String ID, TransactionType type, double amount, LocalDateTime dateTime) {
         this.accNum = accNum;
         this.ID = ID;
         this.type = type;
@@ -47,14 +46,14 @@ public class Transaction {
     }
 
     public String getTypeStr() {
-        return switch(type) {
-            case DEPOSIT -> "DEPOSIT";
-            case WITHDRAW -> "WITHDRAW";
-            default -> "TRANSACTION";
-        };
+        return this.type.name();
+    }
+    
+    public TransactionType getType() {
+        return this.type;
     }
 
-    public void setType(int type) {
+    public void setType(TransactionType type) {
         this.type = type;
     }
 
@@ -72,5 +71,5 @@ public class Transaction {
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
-    } 
+    }
 }

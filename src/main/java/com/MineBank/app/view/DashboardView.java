@@ -4,16 +4,13 @@
  */
 package com.MineBank.app.view;
 
-import com.MineBank.app.controller.DashboardController;
 import com.MineBank.app.model.User;
 import com.MineBank.app.utils.Utils;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  *
@@ -141,8 +138,9 @@ public class DashboardView extends javax.swing.JFrame {
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(accNumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(26, 26, 26)
-                        .addComponent(settingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(settingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -334,6 +332,10 @@ public class DashboardView extends javax.swing.JFrame {
     
     public void setWithdrawBtnAction(ActionListener listener) {
         withdrawBtn.addActionListener(listener);
+    }
+    
+    public void setSettingsBtnAction(ActionListener listener) {
+        settingsBtn.addActionListener(listener);
     }
     
 

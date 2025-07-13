@@ -4,6 +4,7 @@
  */
 package com.MineBank.app.service;
 
+import com.MineBank.app.Enums.TransactionType;
 import com.MineBank.app.model.Transaction;
 import java.util.UUID;
 
@@ -14,10 +15,11 @@ import java.util.UUID;
 public class TransactionsService {
     // update to handle multiple types of transactions
     
-    public static String generateTransactionID(int transactionType) {
-        String prefix = switch (transactionType) {
-            case Transaction.DEPOSIT -> "DPS";
-            case Transaction.WITHDRAW -> "WDR";
+    public static String generateTransactionID(TransactionType type) {
+        String prefix = switch (type) {
+            case TransactionType.DEPOSIT -> "DPS";
+            case TransactionType.WITHDRAW -> "WDR";
+            case TransactionType.TRANSFER -> "TFR";
             default -> "TSN";
         };
         

@@ -3,6 +3,8 @@ C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\m
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\controller\LoginController.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\controller\TransferController.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\controller\WithdrawController.java
+C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\Enums\TransactionType.java
+C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\Enums\UserAccStatus.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\exceptions\AuthenticationException.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\Main.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\model\Transaction.java
@@ -12,7 +14,6 @@ C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\m
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\service\AuthService.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\service\TransactionsService.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\service\UserService.java
-C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\UserAccStatus.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\utils\SessionManager.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\utils\Utils.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\DashboardView.java

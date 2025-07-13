@@ -4,6 +4,7 @@
  */
 package com.MineBank.app.controller;
 
+import com.MineBank.app.Enums.TransactionType;
 import com.MineBank.app.model.Transaction;
 import com.MineBank.app.model.User;
 import com.MineBank.app.repository.TransactionsRepository;
@@ -72,8 +73,8 @@ public class WithdrawController {
         
             transaction = new Transaction(
                     user.getAccNum(),
-                    TransactionsService.generateTransactionID(Transaction.WITHDRAW),
-                    Transaction.WITHDRAW,
+                    TransactionsService.generateTransactionID(TransactionType.WITHDRAW),
+                    TransactionType.WITHDRAW,
                     amount,
                     LocalDateTime.now()
             );

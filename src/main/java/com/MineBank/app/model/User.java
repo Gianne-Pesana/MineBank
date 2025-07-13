@@ -4,7 +4,7 @@
  */
 package com.MineBank.app.model;
 
-import com.MineBank.app.UserAccStatus;
+import com.MineBank.app.Enums.UserAccStatus;
 import com.MineBank.app.utils.Utils;
 
 /**

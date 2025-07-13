@@ -44,8 +44,9 @@ public class WithdrawView extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         withdrawBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
+        invalidNumLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 250, 239));
         jPanel1.setPreferredSize(new java.awt.Dimension(460, 520));
@@ -107,6 +108,10 @@ public class WithdrawView extends javax.swing.JFrame {
             }
         });
 
+        invalidNumLabel.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
+        invalidNumLabel.setForeground(new java.awt.Color(189, 14, 14));
+        invalidNumLabel.setText("Please enter a valid number!");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -129,8 +134,9 @@ public class WithdrawView extends javax.swing.JFrame {
                                 .addGap(0, 191, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(invalidNumLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,11 +153,13 @@ public class WithdrawView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(amountField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(invalidNumLabel)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(withdrawBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,6 +199,8 @@ public class WithdrawView extends javax.swing.JFrame {
     
     // block non-number cgaracters
     private void processInput() {
+        invalidNumLabel.setVisible(false);
+        
         amountField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -199,10 +209,16 @@ public class WithdrawView extends javax.swing.JFrame {
                 
                 if (!Character.isDigit(c) && c != '.' && c != '\b') {
                     e.consume();
+                    invalidNumLabel.setText("Please enter a valid number!");
+                    invalidNumLabel.setVisible(true);
+                } else {
+                    invalidNumLabel.setVisible(false);
                 }
                 
                 if (c == '.' && field.getText().contains(".")) {
                     e.consume();
+                    invalidNumLabel.setText("Number cannot contain multiple decimal points!");
+                    invalidNumLabel.setVisible(true);
                 }
             }
         });
@@ -247,6 +263,7 @@ public class WithdrawView extends javax.swing.JFrame {
     private javax.swing.JTextField amountField;
     private javax.swing.JLabel balanceLabel;
     private javax.swing.JButton cancelBtn;
+    private javax.swing.JLabel invalidNumLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

@@ -45,6 +45,7 @@ public class DashboardController {
         view.setMoneyTransferBtnAction(e -> showMoneyTransferFrame());
         view.setDepositBtnAction(e -> showDepositFrame());
         view.setWithdrawBtnAction(e -> showWithdrawFrame());
+        view.setSettingsBtnAction(e -> showSettingsFrame());
     }
     
     private void showTransactionHistoryFrame() {
@@ -99,6 +100,10 @@ public class DashboardController {
         
         view.setVisible(false);
         withdrawController.init();
+    }
+    
+    private void showSettingsFrame() {
+        System.out.println("Settings Btn pressed.");
     }
     
     private void updateUserInfo(User updatedUser) {

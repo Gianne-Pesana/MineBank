@@ -4,6 +4,7 @@
  */
 package com.MineBank.app.repository;
 
+import com.MineBank.app.Enums.TransactionType;
 import com.MineBank.app.model.Transaction;
 import com.MineBank.app.utils.Utils;
 import java.io.*;
@@ -84,9 +85,9 @@ public class TransactionsRepository {
                 transactions.add(new Transaction(
                         parts[0],   // accNum
                         parts[1],   // ID
-                        Integer.parseInt(parts[2]),   // type
+                        TransactionType.valueOf(parts[2]),   // type
                         Double.parseDouble(parts[3]), // amount
-                        LocalDateTime.parse(parts[4], Utils.yyyy_MM_dd)
+                        LocalDateTime.parse(parts[4], Utils.yyyy_MM_dd)  // dateTime
                     )
                 );
             }

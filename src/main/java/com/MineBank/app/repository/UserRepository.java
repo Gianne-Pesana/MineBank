@@ -4,7 +4,7 @@
  */
 package com.MineBank.app.repository;
 
-import com.MineBank.app.UserAccStatus;
+import com.MineBank.app.Enums.UserAccStatus;
 import java.util.ArrayList;
 import com.MineBank.app.model.User;
 import java.io.BufferedReader;
