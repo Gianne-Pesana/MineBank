@@ -21,7 +21,7 @@ public class DashboardView extends javax.swing.JFrame {
     public DashboardView() {
         initComponents();
         setLocationRelativeTo(null);
-        setIconImage(new ImageIcon("src\\main\\resources\\logo\\title_logo-64px.jpg").getImage());
+        setIconImage(new ImageIcon(DisplaysUtils.programIcon).getImage());
 
         // prevent default close
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -311,7 +311,7 @@ public class DashboardView extends javax.swing.JFrame {
     public void renderHeader(User user) {
         nameLabel.setText("Welcome, " + Utils.toProperCase(user.getFullName()) + "!");
         accNumLabel.setText(user.getAccNum());
-        balanceLabel.setText(user.getBalance() + " emeralds");
+        balanceLabel.setText(DisplaysUtils.formatNumber(user.getBalance()) + " emeralds");
         
         Image scaledImage = new ImageIcon(user.getProfileImage()).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
         ImageIcon profileImage = new ImageIcon(scaledImage);

@@ -15,6 +15,7 @@ import java.util.*;
 public class Main {
     // MAIN
     public static void main(String[] args) {  
+//        new TransactionHistoryView().setVisible(true);
         String path = "data\\user\\userData.txt";
         LoginController loginController = new LoginController(
                 new LoginView(), 

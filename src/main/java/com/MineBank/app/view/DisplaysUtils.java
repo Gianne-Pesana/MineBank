@@ -12,18 +12,28 @@ import javax.swing.JOptionPane;
  * @author giann
  */
 public class DisplaysUtils {
+
+    public static String programIcon = "src\\main\\resources\\logo\\title_logo-64px.jpg";
+
     public static void showError(String error) {
         JDialog modal = new JDialog();
         modal.setAlwaysOnTop(true);
         JOptionPane.showMessageDialog(
-                modal, 
-                "Error: " + error, 
-                "Error", 
+                modal,
+                "Error: " + error,
+                "Error",
                 JOptionPane.ERROR_MESSAGE
         );
     }
-    
+
+    public static String formatNumber(double num) {
+        String numStr = String.valueOf(num);
+        String[] parts = numStr.split("\\.");
+        String formatted = String.format("%,d", Long.parseLong(parts[0]));
+        return parts.length > 1 ? formatted + "." + parts[1] : formatted;
+    }
+
     public static void showReceipt() {
-        
+
     }
 }

@@ -10,6 +10,8 @@ import com.MineBank.app.repository.*;
 import com.MineBank.app.view.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.util.ArrayList;
 
 
 /**
@@ -49,7 +51,24 @@ public class DashboardController {
     }
     
     private void showTransactionHistoryFrame() {
-        System.out.println("Transaction History Btn Clicked");
+        view.setAllButtonsEnabled(false);
+        
+        TransactionsRepository trRepo = new TransactionsRepository();
+        TransactionHistoryView trView = new TransactionHistoryView();
+        trView.setLocationRelativeTo(view);
+        
+        TransactHistoryCtrl trController = new TransactHistoryCtrl(user, trView, trRepo);
+        
+        trView.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                view.setVisible(true);
+                view.setAllButtonsEnabled(true);
+            }
+        });
+        
+        view.setVisible(false);
+        trController.init();
     }
     
     private void showMoneyTransferFrame() {
@@ -94,7 +113,7 @@ public class DashboardController {
             public void windowClosed(WindowEvent e) {
                 view.setVisible(true);
                 view.setAllButtonsEnabled(true);
-                updateUserInfo(user);
+                updateUserInfo(withdrawController.user);
             }
         });
         

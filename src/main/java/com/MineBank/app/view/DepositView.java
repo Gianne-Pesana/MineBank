@@ -10,6 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
 /**
@@ -24,7 +25,7 @@ public class DepositView extends javax.swing.JFrame {
     public DepositView() {
         initComponents();
         processInput();
-        setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(DisplaysUtils.programIcon).getImage());
         
 //        addWindowListener(new WindowAdapter() {
 //            @Override
@@ -245,7 +246,7 @@ public class DepositView extends javax.swing.JFrame {
     
     public void renderUserInfo(User user) {
         accNumLabel.setText("Account Number: " + user.getAccNum());
-        balanceLabel.setText("Balance: " + user.getBalance() + " emeralds");
+        balanceLabel.setText("Balance: " + DisplaysUtils.formatNumber(user.getBalance()) + " emeralds");
     }
     
     /**8

@@ -1,6 +1,7 @@
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\controller\DashboardController.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\controller\DepositController.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\controller\LoginController.java
+C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\controller\TransactHistoryCtrl.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\controller\TransferController.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\controller\WithdrawController.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\Enums\TransactionType.java
@@ -21,5 +22,6 @@ C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\m
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\DisplaysUtils.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\LoginView.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\ReceiptModal.java
+C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\TransactionHistoryView.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\TransferView.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\WithdrawView.java

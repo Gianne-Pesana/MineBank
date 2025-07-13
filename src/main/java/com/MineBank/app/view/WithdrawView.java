@@ -8,6 +8,7 @@ import com.MineBank.app.model.User;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
 /**
@@ -24,6 +25,7 @@ public class WithdrawView extends javax.swing.JFrame {
     public WithdrawView() {
         initComponents();
         processInput();
+        setIconImage(new ImageIcon(DisplaysUtils.programIcon).getImage());
     }
 
     /**
@@ -47,6 +49,7 @@ public class WithdrawView extends javax.swing.JFrame {
         invalidNumLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Withdraw");
 
         jPanel1.setBackground(new java.awt.Color(255, 250, 239));
         jPanel1.setPreferredSize(new java.awt.Dimension(460, 520));
@@ -226,7 +229,7 @@ public class WithdrawView extends javax.swing.JFrame {
     
     public void renderUserInfo(User user) {
         accNumLabel.setText("Account Number: " + user.getAccNum());
-        balanceLabel.setText("Balance: " + user.getBalance() + " emeralds");
+        balanceLabel.setText("Balance: " + DisplaysUtils.formatNumber(user.getBalance()) + " emeralds");
     }
     
     public String getInputAmountStr() {

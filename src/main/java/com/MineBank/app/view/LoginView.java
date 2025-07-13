@@ -19,7 +19,7 @@ public class LoginView extends javax.swing.JFrame {
     public LoginView() {
         initComponents();
         setLocationRelativeTo(null);
-//        setIconImage(new ImageIcon("src\\main\\resources\\logo\\title_logo-64px.jpg").getImage());
+        setIconImage(new ImageIcon(DisplaysUtils.programIcon).getImage());
     }
 
   
