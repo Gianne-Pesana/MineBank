@@ -16,6 +16,13 @@ public class Main {
     // MAIN
     public static void main(String[] args) {  
 //        new TransactionHistoryView().setVisible(true);
+        TransferView trv = new TransferView();
+        trv.setFoundStatus(TransferView.loading);
+        trv.setVisible(true);
+//        start();
+    }
+    
+    public static void start() {
         String path = "data\\user\\userData.txt";
         LoginController loginController = new LoginController(
                 new LoginView(), 

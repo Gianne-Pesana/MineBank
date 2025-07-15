@@ -4,6 +4,7 @@ com\MineBank\app\view\ReceiptModal$1.class
 com\MineBank\app\controller\TransferController.class
 com\MineBank\app\controller\WithdrawController.class
 com\MineBank\app\view\LoginView$1.class
+com\MineBank\app\view\TransferView2.class
 com\MineBank\app\repository\UserRepository.class
 com\MineBank\app\controller\TransactHistoryCtrl.class
 com\MineBank\app\view\LoginView$4.class

@@ -4,6 +4,10 @@
  */
 package com.MineBank.app.view;
 
+import java.awt.Color;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author giann
@@ -17,6 +21,8 @@ public class TransferView extends javax.swing.JFrame {
      */
     public TransferView() {
         initComponents();
+        
+        findStatus.setVisible(false);
     }
 
     /**
@@ -28,22 +34,207 @@ public class TransferView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        tranferIcon = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        inputField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        transferBtn = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
+        findStatus = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(227, 234, 236));
+
+        jPanel2.setBackground(new java.awt.Color(255, 250, 239));
+        jPanel2.setOpaque(false);
+
+        tranferIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/transferView/villager150pxH.png"))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("minecrafter", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Emerald Transfer");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 16, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(tranferIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tranferIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(255, 250, 239));
+
+        inputField.setBackground(new java.awt.Color(232, 229, 222));
+        inputField.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
+        inputField.setForeground(new java.awt.Color(0, 0, 0));
+        inputField.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(164, 159, 159), new java.awt.Color(231, 227, 227)), javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+
+        jLabel2.setBackground(new java.awt.Color(78, 78, 78));
+        jLabel2.setFont(new java.awt.Font("Minecraft", 0, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(57, 57, 57));
+        jLabel2.setText("Transfer to account number:");
+
+        transferBtn.setBackground(new java.awt.Color(204, 213, 174));
+        transferBtn.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
+        transferBtn.setForeground(new java.awt.Color(58, 58, 58));
+        transferBtn.setText("Transfer");
+        transferBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        cancelBtn.setBackground(new java.awt.Color(172, 172, 172));
+        cancelBtn.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(41, 41, 41));
+        cancelBtn.setText("Cancel");
+
+        findStatus.setBackground(new java.awt.Color(32, 125, 18));
+        findStatus.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
+        findStatus.setForeground(new java.awt.Color(32, 125, 18));
+        findStatus.setText("Account found!");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(findStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(transferBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputField, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inputField, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(findStatus)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(transferBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public static int found = 0;
+    public static int loading = 1;
+    public static int error = 2;
+    public static int none = 3;
+    
+    
+    public void setFoundStatus(int status) {
+        String path = "";
+        switch (status) {
+            case 0 -> {
+                path = "src\\main\\resources\\icons\\transferView\\verified-16px.png";
+                findStatus.setText("Account Found");
+                findStatus.setForeground(new Color(32,125,18));
+                findStatus.setVisible(true);
+            }
+            case 1 -> {
+//                path = "src\\main\\resources\\icons\\transferView\\BlocksLoad3-16px.gif";
+                findStatus.setText("");
+                findStatus.setForeground(Color.green);
+                findStatus.setVisible(true);
+            }
+            
+            case 2 -> {
+                path = "src\\main\\resources\\icons\\transferView\\error-16px.png";
+                findStatus.setText("Account not found!");
+                findStatus.setForeground(Color.red);
+                findStatus.setVisible(true);
+            }
+            case 3 -> {
+                findStatus.setText("");
+                findStatus.setVisible(false);
+            }
+        }
+        
+        Image scaledImage;
+        int scale = 12;
+        
+        if (!path.isBlank()) {
+            scaledImage = new ImageIcon(path)
+                            .getImage()
+                            .getScaledInstance(scale, scale, Image.SCALE_SMOOTH);
+            findStatus.setIcon(new ImageIcon(scaledImage));
+        } else if (status == loading) {
+            findStatus.setText("<html>"
+                                + "<img src='file:src\\main\\resources\\icons\\transferView\\BlocksLoad3-16px.gif' "
+                                + "width='12' height='12'>"
+                              +"</html>");
+        } else {
+            findStatus.setIcon(null);
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -70,5 +261,15 @@ public class TransferView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelBtn;
+    private javax.swing.JLabel findStatus;
+    private javax.swing.JTextField inputField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel tranferIcon;
+    private javax.swing.JButton transferBtn;
     // End of variables declaration//GEN-END:variables
 }
