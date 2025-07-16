@@ -5,6 +5,4 @@ It simulates a simple bank system with account creation, transaction viewing, an
 
 Currently, it uses `.txt` files to store data but is being prepared for a full backend upgrade using **MySQL** and **Spring Boot** for future deployment.
 
-Whether you're depositing emeralds or managing fake money, MineBank makes it fun and educational.
-
 > It’s like a Minecraft village got a bank... but in Java.
