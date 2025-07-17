@@ -68,7 +68,9 @@ public class DashboardController {
     }
 
     private void showMoneyTransferFrame() {
-        System.out.println("Money Transfer Btn Clicked");
+        TransferView tfView = new TransferView();
+        TransferController tfController = new TransferController(user, tfView, repo);
+        tfController.init();
     }
 
     private void showDepositFrame() {

@@ -38,4 +38,12 @@ public class Utils {
                 JOptionPane.ERROR_MESSAGE
         );
     }
+    
+    public static void delay(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException ie) {
+            System.out.println(ie.getMessage());
+        }
+    }
 }

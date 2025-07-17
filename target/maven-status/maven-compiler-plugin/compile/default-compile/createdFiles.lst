@@ -46,6 +46,7 @@ com\MineBank\app\Enums\TransactionType.class
 com\MineBank\app\controller\WithdrawController$1.class
 com\MineBank\app\controller\DashboardController.class
 com\MineBank\app\model\User.class
+com\MineBank\app\view\TransferView$1.class
 com\MineBank\app\view\DashboardView$5.class
 com\MineBank\app\controller\DashboardController$3.class
 com\MineBank\app\view\DepositView.class

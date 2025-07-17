@@ -7,6 +7,7 @@ package com.MineBank.app;
 import com.MineBank.app.view.*;
 import com.MineBank.app.repository.*;
 import com.MineBank.app.controller.*;
+import com.MineBank.app.model.User;
 import java.util.*;
 /**
  *
@@ -16,10 +17,9 @@ public class Main {
     // MAIN
     public static void main(String[] args) {  
 //        new TransactionHistoryView().setVisible(true);
-        TransferView trv = new TransferView();
-        trv.setFoundStatus(TransferView.loading);
-        trv.setVisible(true);
-//        start();
+
+//        test();
+        start();
     }
     
     public static void start() {
@@ -28,5 +28,11 @@ public class Main {
                 new LoginView(), 
                 new UserRepository(path));
         loginController.init();
+    }
+    
+    public static void test() {
+        TransferView trv = new TransferView();
+        trv.displayFoundStatus(TransferView.loading);
+        trv.setVisible(true);
     }
 }

@@ -4,8 +4,13 @@
  */
 package com.MineBank.app.view;
 
+import com.MineBank.app.controller.TransferController;
+import com.MineBank.app.utils.Utils;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
 /**
@@ -19,9 +24,9 @@ public class TransferView extends javax.swing.JFrame {
     /**
      * Creates new form TransferView
      */
+    
     public TransferView() {
         initComponents();
-        
         findStatus.setVisible(false);
     }
 
@@ -113,12 +118,8 @@ public class TransferView extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(findStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -130,6 +131,10 @@ public class TransferView extends javax.swing.JFrame {
                                 .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(inputField, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(findStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,82 +188,121 @@ public class TransferView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static int found = 0;
-    public static int loading = 1;
-    public static int error = 2;
-    public static int none = 3;
+    public static final int found = 0;
+    public static final int loading = 1;
+    public static final int notFound = 2;
+    public static final int none = 3;
     
     
-    public void setFoundStatus(int status) {
+    public void displayFoundStatus(int status) {
+        Image scaledImage;
+        boolean isVisible = false;
+        int scale = 12;
         String path = "";
         switch (status) {
-            case 0 -> {
-                path = "src\\main\\resources\\icons\\transferView\\verified-16px.png";
-                findStatus.setText("Account Found");
-                findStatus.setForeground(new Color(32,125,18));
-                findStatus.setVisible(true);
-            }
-            case 1 -> {
-//                path = "src\\main\\resources\\icons\\transferView\\BlocksLoad3-16px.gif";
-                findStatus.setText("");
-                findStatus.setForeground(Color.green);
-                findStatus.setVisible(true);
-            }
-            
-            case 2 -> {
-                path = "src\\main\\resources\\icons\\transferView\\error-16px.png";
-                findStatus.setText("Account not found!");
-                findStatus.setForeground(Color.red);
-                findStatus.setVisible(true);
-            }
-            case 3 -> {
-                findStatus.setText("");
-                findStatus.setVisible(false);
-            }
-        }
-        
-        Image scaledImage;
-        int scale = 12;
-        
-        if (!path.isBlank()) {
-            scaledImage = new ImageIcon(path)
+            case found -> {
+                scaledImage = new ImageIcon("src\\main\\resources\\icons\\transferView\\verified-16px.png")
                             .getImage()
                             .getScaledInstance(scale, scale, Image.SCALE_SMOOTH);
-            findStatus.setIcon(new ImageIcon(scaledImage));
-        } else if (status == loading) {
-            findStatus.setText("<html>"
-                                + "<img src='file:src\\main\\resources\\icons\\transferView\\BlocksLoad3-16px.gif' "
-                                + "width='12' height='12'>"
-                              +"</html>");
-        } else {
-            findStatus.setIcon(null);
+                findStatus.setIcon(new ImageIcon(scaledImage));
+                findStatus.setText("Account Found");
+                findStatus.setForeground(new Color(32,125,18));
+                isVisible = true;
+            }
+            case loading -> {
+//                path = "src\\main\\resources\\icons\\transferView\\BlocksLoad3-16px.gif";
+                scaledImage = null;
+                findStatus.setIcon(null);
+                findStatus.setText(
+                        "<html>"
+                        + "<img src='file:src\\main\\resources\\icons\\transferView\\BlocksLoad3-16px.gif' "
+                        + "width='12' height='12'>"
+                       +"</html>");
+                isVisible = true;
+            }
+            
+            case notFound -> {
+                scaledImage = new ImageIcon("src\\main\\resources\\icons\\transferView\\error-16px.png")
+                            .getImage()
+                            .getScaledInstance(scale, scale, Image.SCALE_SMOOTH);
+                findStatus.setIcon(new ImageIcon(scaledImage));
+                findStatus.setText("Account not found!");
+                findStatus.setForeground(Color.red);
+                isVisible = true;
+            }
+            default -> {
+                scaledImage = null;
+                findStatus.setText("");
+                isVisible = false;
+            }
         }
         
+        findStatus.setVisible(isVisible);
+        
     }
+    
+    public void setTransferBtnAction(ActionListener listener) {
+        transferBtn.addActionListener(listener);
+    }
+    
+    public void setCancelBtnAction(ActionListener listener) {
+        cancelBtn.addActionListener(listener);
+    }
+    
+    public void checkInput(TransferController controller) {
+        inputField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                displayFoundStatus(loading);
+            }
+            
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String input = inputField.getText().trim();
+                System.out.println(input);
+                if (controller.validateAccount(input) != null) {
+                    displayFoundStatus(found);
+                } else if (input.isBlank()) {
+                    displayFoundStatus(none);
+                } else {
+                    displayFoundStatus(notFound);
+                }
+            }
+        });
+    }
+    
+    public void showUserNotFound() {
+        DisplaysUtils.showError("User not found!");
+    }
+    
+    public String getInputFieldVal() {
+        return inputField.getText().trim();
+    }
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TransferView().setVisible(true));
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            logger.log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(() -> new TransferView().setVisible(true));
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;

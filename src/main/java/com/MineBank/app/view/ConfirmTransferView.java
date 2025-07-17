@@ -8,14 +8,14 @@ package com.MineBank.app.view;
  *
  * @author giann
  */
-public class TransferView2 extends javax.swing.JFrame {
+public class ConfirmTransferView extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TransferView2.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ConfirmTransferView.class.getName());
 
     /**
      * Creates new form TransferView2
      */
-    public TransferView2() {
+    public ConfirmTransferView() {
         initComponents();
     }
 
@@ -90,7 +90,7 @@ public class TransferView2 extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TransferView2().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ConfirmTransferView().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
