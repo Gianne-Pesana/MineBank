@@ -228,11 +228,10 @@ public class TransferView extends javax.swing.JFrame {
                 findStatus.setForeground(new Color(32, 125, 18));
             }
             case loading -> {
-                findStatus.setIcon(null);
-                findStatus.setText(
-                    "<html><img src='file:src/main/resources/icons/transferView/BlocksLoad3-16px.gif' " +
-                    "width='" + scale + "' height='" + scale + "'></html>");
+                findStatus.setIcon(loadGifIcon("/icons/transferView/BlocksLoad3-16px.gif"));
+                findStatus.setText(""); // or some loading text if you want
             }
+
             case notFound -> {
                 findStatus.setIcon(loadAndScaleIcon("/icons/transferView/error-16px.png", scale, scale));
                 findStatus.setText("Account not found!");
@@ -262,6 +261,15 @@ public class TransferView extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon(resourceURL);
         Image scaled = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(scaled);
+    }
+
+    private ImageIcon loadGifIcon(String resourcePath) {
+        URL resourceURL = getClass().getResource(resourcePath);
+        if (resourceURL == null) {
+            System.err.println("GIF resource not found: " + resourcePath);
+            return null;
+        }
+        return new ImageIcon(resourceURL);
     }
 
 
