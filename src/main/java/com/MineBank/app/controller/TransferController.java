@@ -98,52 +98,56 @@ public class TransferController {
     }
     
     private void confirmTransfer() {
-        ctView.setConfirmBtnAction(e -> {
-            double userNewBalance = user.getBalance() - transferAmt;
-            user.setBalance(userNewBalance);
-            userRepo.updateUser(user);
-            
-            double recipientNewBalance = recipient.getBalance() + transferAmt;
-            recipient.setBalance(recipientNewBalance);
-            userRepo.updateUser(recipient);
-            
-            TransactionsRepository trRepo = new TransactionsRepository();
-            Transaction senderTrn = null;
-            Transaction recipientTrn = null;
-            
-            try {
-                // sender
-                senderTrn = new Transfer(
-                    user.getAccNum(),   // accNum
-                    TransactionsService.generateTransactionID(TransactionType.TRANSFER),
-                    transferAmt,
-                    LocalDateTime.now(),
-                    recipient.getAccNum(),
-                    true
-                );
-                
-                // receiver
-                recipientTrn = new Transfer(
-                    recipient.getAccNum(),   // accNum
-                    TransactionsService.generateTransactionID(TransactionType.TRANSFER),
-                    transferAmt,
-                    LocalDateTime.now(),
-                    user.getAccNum(),
-                    false
-                );
-                
-                trRepo.saveTransaction(senderTrn);
-                trRepo.saveTransaction(recipientTrn);
-                
-            } catch (IOException ie) {
-                System.out.println("Error in saving transfer transaction");
-            }
-            
-            createReceipt(senderTrn);
-            
+        ctView.setConfirmBtnAction(e -> processTransfer());
+        ctView.setCancelBtnAction(e -> {
+            ctView.dispose();
+            amountView.setVisible(true);
         });
-        
         ctView.setVisible(true);
+    }
+    
+    private void processTransfer() {
+        double userNewBalance = user.getBalance() - transferAmt;
+        user.setBalance(userNewBalance);
+        userRepo.updateUser(user);
+
+        double recipientNewBalance = recipient.getBalance() + transferAmt;
+        recipient.setBalance(recipientNewBalance);
+        userRepo.updateUser(recipient);
+
+        TransactionsRepository trRepo = new TransactionsRepository();
+        Transaction senderTrn = null;
+        Transaction recipientTrn = null;
+
+        try {
+            // sender
+            senderTrn = new Transfer(
+                user.getAccNum(),   // accNum
+                TransactionsService.generateTransactionID(TransactionType.TRANSFER),
+                transferAmt,
+                LocalDateTime.now(),
+                recipient.getAccNum(),
+                true
+            );
+
+            // receiver
+            recipientTrn = new Transfer(
+                recipient.getAccNum(),   // accNum
+                TransactionsService.generateTransactionID(TransactionType.TRANSFER),
+                transferAmt,
+                LocalDateTime.now(),
+                user.getAccNum(),
+                false
+            );
+
+            trRepo.saveTransaction(senderTrn);
+            trRepo.saveTransaction(recipientTrn);
+
+        } catch (IOException ie) {
+            System.out.println("Error in saving transfer transaction");
+        }
+
+        createReceipt(senderTrn);
     }
     
     private void createReceipt(Transaction transaction) {
