@@ -92,6 +92,11 @@ public class TransferView extends javax.swing.JFrame {
         inputField.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
         inputField.setForeground(new java.awt.Color(0, 0, 0));
         inputField.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(164, 159, 159), new java.awt.Color(231, 227, 227)), javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        inputField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputFieldActionPerformed(evt);
+            }
+        });
 
         jLabel2.setBackground(new java.awt.Color(78, 78, 78));
         jLabel2.setFont(new java.awt.Font("Minecraft", 0, 16)); // NOI18N
@@ -103,11 +108,18 @@ public class TransferView extends javax.swing.JFrame {
         transferBtn.setForeground(new java.awt.Color(58, 58, 58));
         transferBtn.setText("Transfer");
         transferBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        transferBtn.setFocusable(false);
+        transferBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transferBtnActionPerformed(evt);
+            }
+        });
 
         cancelBtn.setBackground(new java.awt.Color(172, 172, 172));
         cancelBtn.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
         cancelBtn.setForeground(new java.awt.Color(41, 41, 41));
         cancelBtn.setText("Cancel");
+        cancelBtn.setFocusable(false);
 
         findStatus.setBackground(new java.awt.Color(32, 125, 18));
         findStatus.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
@@ -188,10 +200,19 @@ public class TransferView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void transferBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferBtnActionPerformed
+        
+    }//GEN-LAST:event_transferBtnActionPerformed
+
+    private void inputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputFieldActionPerformed
+        transferBtn.doClick();
+    }//GEN-LAST:event_inputFieldActionPerformed
+
     public static final int found = 0;
     public static final int loading = 1;
     public static final int notFound = 2;
     public static final int none = 3;
+    public static final int toSelf = 4;
     
     
     public void displayFoundStatus(int status) {
@@ -230,6 +251,15 @@ public class TransferView extends javax.swing.JFrame {
                 findStatus.setForeground(Color.red);
                 isVisible = true;
             }
+            case toSelf -> {
+                scaledImage = new ImageIcon("src\\main\\resources\\icons\\transferView\\error-16px.png")
+                            .getImage()
+                            .getScaledInstance(scale, scale, Image.SCALE_SMOOTH);
+                findStatus.setIcon(new ImageIcon(scaledImage));
+                findStatus.setText("Cannot transfer to yourself!");
+                findStatus.setForeground(Color.red);
+                isVisible = true;
+            }
             default -> {
                 scaledImage = null;
                 findStatus.setText("");
@@ -259,8 +289,10 @@ public class TransferView extends javax.swing.JFrame {
             @Override
             public void keyReleased(KeyEvent e) {
                 String input = inputField.getText().trim();
-                System.out.println(input);
-                if (controller.validateAccount(input) != null) {
+               
+                if (input.equals(controller.getUser().getAccNum())) {
+                    displayFoundStatus(toSelf);
+                } else if (controller.validateAccount(input) != null) {
                     displayFoundStatus(found);
                 } else if (input.isBlank()) {
                     displayFoundStatus(none);
@@ -284,8 +316,8 @@ public class TransferView extends javax.swing.JFrame {
         });
     }
     
-    public void showUserNotFound() {
-        DisplaysUtils.showError("User not found!");
+    public void showInvalidUser() {
+        DisplaysUtils.showError("Invalid user!");
     }
     
     public String getInputFieldVal() {

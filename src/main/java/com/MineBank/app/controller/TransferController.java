@@ -59,7 +59,7 @@ public class TransferController {
         recipient = validateAccount(recipientView.getInputFieldVal());
         
         if(recipient == null) {
-            recipientView.showUserNotFound();
+            recipientView.showInvalidUser();
             return;
         }
         
@@ -175,14 +175,11 @@ public class TransferController {
     }
     
     public User validateAccount(String accNum) {
-        for(User user : usersList) {
-            if(accNum.equals(user.getAccNum())) {
-                System.out.println("User found");
+        for(User targetUser : usersList) {
+            if(accNum.equals(targetUser.getAccNum()) && !accNum.equals(this.user.getAccNum())) {
                 return user;
             }
         }
-        
-        System.out.println("User not found!");
         return null;
     }
     
@@ -197,5 +194,9 @@ public class TransferController {
         } else {
             return true;
         }
+    }
+    
+    public User getUser() {
+        return this.user;
     }
 }

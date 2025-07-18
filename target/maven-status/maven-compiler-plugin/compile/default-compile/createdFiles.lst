@@ -13,6 +13,7 @@ com\MineBank\app\view\TransactionHistoryView$3.class
 com\MineBank\app\controller\DepositController$1.class
 com\MineBank\app\view\TransactionAmtView$1.class
 com\MineBank\app\view\DashboardView$4.class
+com\MineBank\app\view\TransferView$2.class
 com\MineBank\app\view\DashboardView$1.class
 com\MineBank\app\view\TransactionHistoryView$2.class
 com\MineBank\app\view\DashboardView.class
@@ -29,6 +30,7 @@ com\MineBank\app\view\ConfirmTransferView$2.class
 com\MineBank\app\view\TransactionAmtView$3.class
 com\MineBank\app\view\DashboardView$3.class
 com\MineBank\app\view\ConfirmTransferView.class
+com\MineBank\app\view\TransferView$3.class
 com\MineBank\app\controller\DepositController.class
 com\MineBank\app\controller\DashboardController$1.class
 com\MineBank\app\view\LoginView$2.class
