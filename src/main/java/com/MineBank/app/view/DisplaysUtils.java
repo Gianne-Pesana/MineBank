@@ -26,7 +26,11 @@ public class DisplaysUtils {
         );
     }
 
-    public static String formatNumber(double num) {
+    public static String formatAmount(double amount) {
+        return String.format("%.3f", amount);
+    }
+    
+    public static String formatNumberLong(double num) {
         String numStr = String.valueOf(num);
         String[] parts = numStr.split("\\.");
         String formatted = String.format("%,d", Long.parseLong(parts[0]));

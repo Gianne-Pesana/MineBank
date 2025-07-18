@@ -56,20 +56,20 @@ public class TransactionsRepository {
         }
     }
     
-    public void saveTransaction(String accNum, String ID, String type, double amount, LocalDateTime dateTime) throws IOException {
-        try (FileWriter outFile = new FileWriter(filePath)) {
-            outFile.append(
-                    accNum + "|" + 
-                    ID + "|" +
-                    type + "|" + 
-                    amount + "|" +
-                    dateTime.format(Utils.yyyy_MM_dd)          
-            );
-            
-        } catch(IOException e) {
-            throw new IOException("Error: Failed to save transaction in path: " + filePath);
-        }
-    }
+//    public void saveTransaction(String accNum, String ID, String type, double amount, LocalDateTime dateTime) throws IOException {
+//        try (FileWriter outFile = new FileWriter(filePath)) {
+//            outFile.append(
+//                    accNum + "|" + 
+//                    ID + "|" +
+//                    type + "|" + 
+//                    amount + "|" +
+//                    dateTime.format(Utils.yyyy_MM_dd)          
+//            );
+//            
+//        } catch(IOException e) {
+//            throw new IOException("Error: Failed to save transaction in path: " + filePath);
+//        }
+//    }
     
     public ArrayList<Transaction> loadAllTransactions() throws IOException {
         ArrayList<Transaction> transactions = new ArrayList<>();
@@ -127,12 +127,12 @@ public class TransactionsRepository {
             }
             
             // Handle transfer
-            if (transaction instanceof Transfer) {
-                Transfer transfer = (Transfer) transaction;
-                if (accNum.equals(transfer.recipientNum)) {
-                    userTransactions.add(transaction);
-                }
-            }
+//            if (transaction instanceof Transfer) {
+//                Transfer transfer = (Transfer) transaction;
+//                if (accNum.equals(transfer.recipientNum)) {
+//                    userTransactions.add(transaction);
+//                }
+//            }
         }
         
         return userTransactions;

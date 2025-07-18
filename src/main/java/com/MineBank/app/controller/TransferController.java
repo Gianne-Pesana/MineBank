@@ -85,7 +85,6 @@ public class TransferController {
             
             ctView = new ConfirmTransferView(recipient, transferAmt);
             ctView.setLocationRelativeTo(amountView);
-            amountView.dispose();
             confirmTransfer();
             
         });
@@ -110,6 +109,7 @@ public class TransferController {
             
             TransactionsRepository trRepo = new TransactionsRepository();
             Transaction senderTrn = null;
+            Transaction recipientTrn = null;
             
             try {
                 // sender
@@ -122,7 +122,18 @@ public class TransferController {
                     true
                 );
                 
+                // receiver
+                recipientTrn = new Transfer(
+                    recipient.getAccNum(),   // accNum
+                    TransactionsService.generateTransactionID(TransactionType.TRANSFER),
+                    transferAmt,
+                    LocalDateTime.now(),
+                    user.getAccNum(),
+                    false
+                );
+                
                 trRepo.saveTransaction(senderTrn);
+                trRepo.saveTransaction(recipientTrn);
                 
             } catch (IOException ie) {
                 System.out.println("Error in saving transfer transaction");
@@ -132,6 +143,7 @@ public class TransferController {
             
         });
         
+        ctView.setVisible(true);
     }
     
     private void createReceipt(Transaction transaction) {

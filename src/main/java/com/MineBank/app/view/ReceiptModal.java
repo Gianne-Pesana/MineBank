@@ -365,12 +365,12 @@ public class ReceiptModal extends javax.swing.JDialog {
     
     public void showReceipt(Transaction transaction) {        
         transactionHeader.setText(Utils.toProperCase(transaction.getTypeStr()) + " Success!");
-        depositAmountHeader.setText("EMD " + DisplaysUtils.formatNumber(transaction.getAmount()));
+        depositAmountHeader.setText("EMD " + DisplaysUtils.formatAmount(transaction.getAmount()));
         accNumValue.setText(transaction.getAccNum());
         transactionIDValue.setText(transaction.getID());
         transactionTypeValue.setText(Utils.toProperCase(transaction.getTypeStr()));
         dateTimeValue.setText(transaction.dateTime.format(Utils.MMMM_dd_yy));
-        depositAmountFooter.setText(DisplaysUtils.formatNumber(transaction.getAmount()));
+        depositAmountFooter.setText(DisplaysUtils.formatAmount(transaction.getAmount()));
         setVisible(true);
     }
     

@@ -243,7 +243,7 @@ public class TransactionAmtView extends javax.swing.JFrame {
     
     public void renderUserInfo(User user) {
         accNumLabel.setText("Account Number: " + user.getAccNum());
-        balanceLabel.setText("Balance: " + DisplaysUtils.formatNumber(user.getBalance()) + " emeralds");
+        balanceLabel.setText("Balance: " + DisplaysUtils.formatAmount(user.getBalance()) + " emeralds");
     }
     
     public String getInputAmountStr() {

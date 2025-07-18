@@ -311,7 +311,7 @@ public class DashboardView extends javax.swing.JFrame {
     public void renderHeader(User user) {
         nameLabel.setText("Welcome, " + Utils.toProperCase(user.getFullName()) + "!");
         accNumLabel.setText(user.getAccNum());
-        balanceLabel.setText(DisplaysUtils.formatNumber(user.getBalance()) + " emeralds");
+        balanceLabel.setText(DisplaysUtils.formatAmount(user.getBalance()) + " emeralds");
         
         Image scaledImage = new ImageIcon(user.getProfileImage()).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
         ImageIcon profileImage = new ImageIcon(scaledImage);

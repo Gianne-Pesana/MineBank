@@ -185,7 +185,7 @@ public class TransactionHistoryView extends javax.swing.JFrame {
     }
     
     private String formatAmount(double amount, Transaction t) {
-        return getOperator(t) + " EMD " + DisplaysUtils.formatNumber(amount);
+        return getOperator(t) + " EMD " + DisplaysUtils.formatAmount(amount);
     }
     
     private char getOperator(Transaction transaction) {
