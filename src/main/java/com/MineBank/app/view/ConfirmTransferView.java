@@ -7,6 +7,7 @@ package com.MineBank.app.view;
 import com.MineBank.app.model.User;
 import com.MineBank.app.utils.Utils;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -28,6 +29,7 @@ public class ConfirmTransferView extends javax.swing.JFrame {
         this.amount = amount;
         initComponents();
         renderInfo();
+        setIconImage(new ImageIcon(DisplaysUtils.programIcon).getImage());
     }
 
     /**
@@ -107,6 +109,7 @@ public class ConfirmTransferView extends javax.swing.JFrame {
         confirmBtn.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
         confirmBtn.setForeground(new java.awt.Color(0, 0, 0));
         confirmBtn.setText("Confirm");
+        confirmBtn.setFocusable(false);
         confirmBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmBtnActionPerformed(evt);
@@ -117,6 +120,7 @@ public class ConfirmTransferView extends javax.swing.JFrame {
         cancelBtn.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
         cancelBtn.setForeground(new java.awt.Color(0, 0, 0));
         cancelBtn.setText("Cancel");
+        cancelBtn.setFocusable(false);
 
         ptCheckBox.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
         ptCheckBox.setForeground(new java.awt.Color(102, 102, 102));
@@ -223,6 +227,10 @@ public class ConfirmTransferView extends javax.swing.JFrame {
     
     public void setCancelBtnAction(ActionListener listener) {
         cancelBtn.addActionListener(listener);
+    }
+    
+    public boolean isProtectedTranfer() {
+        return ptCheckBox.isSelected();
     }
     
     private void renderInfo() {

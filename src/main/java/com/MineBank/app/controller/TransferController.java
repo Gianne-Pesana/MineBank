@@ -108,6 +108,10 @@ public class TransferController {
     
     private void processTransfer() {
         double userNewBalance = user.getBalance() - transferAmt;
+        if (ctView.isProtectedTranfer()) {
+            userNewBalance -= 20;
+        }
+        
         user.setBalance(userNewBalance);
         userRepo.updateUser(user);
 

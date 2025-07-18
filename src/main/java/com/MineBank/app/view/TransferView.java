@@ -28,6 +28,7 @@ public class TransferView extends javax.swing.JFrame {
     public TransferView() {
         initComponents();
         findStatus.setVisible(false);
+        setIconImage(new ImageIcon(DisplaysUtils.programIcon).getImage());
     }
 
     /**
