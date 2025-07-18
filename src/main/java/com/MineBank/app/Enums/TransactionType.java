@@ -9,19 +9,19 @@ package com.MineBank.app.Enums;
  * @author giann
  */
 public enum TransactionType {
-        DEPOSIT,
-        WITHDRAW,
-        TRANSFER;
-        
-        public boolean isDeposit() {
-            return this == DEPOSIT;
-        }
-        
-        public boolean isWithdraw() {
-            return this == WITHDRAW;
-        }
-        
-        public boolean isTransfer() {
-            return this == TRANSFER;
-        }
+    DEPOSIT,
+    WITHDRAW,
+    TRANSFER;
+
+    public boolean isDeposit() {
+        return this == DEPOSIT;
     }
+
+    public boolean isWithdraw() {
+        return this == WITHDRAW;
+    }
+
+    public boolean isTransfer() {
+        return this == TRANSFER;
+    }
+}

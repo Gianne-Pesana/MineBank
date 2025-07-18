@@ -6,6 +6,7 @@ package com.MineBank.app.repository;
 
 import com.MineBank.app.Enums.TransactionType;
 import com.MineBank.app.model.Transaction;
+import com.MineBank.app.model.Transfer;
 import com.MineBank.app.utils.Utils;
 import java.io.*;
 import java.time.LocalDateTime;
@@ -38,10 +39,15 @@ public class TransactionsRepository {
             outFile.append(
                     transaction.accNum + "|" + 
                     transaction.ID + "|" +
-                    transaction.type + "|" + 
+                    transaction.type + "|" +
                     transaction.amount + "|" +
                     transaction.dateTime.format(Utils.yyyy_MM_dd)
             );
+            
+            if (transaction instanceof Transfer) {
+                outFile.append("|" + ((Transfer) transaction).recipientNum);
+                outFile.append( "|" + ((Transfer) transaction).isSender);
+            }
             
             outFile.append("\n");
             
@@ -76,20 +82,34 @@ public class TransactionsRepository {
                 lineNum++;
                 String parts[] = line.split("\\|");
                 
-                if(parts.length != 5) {
+                // check length
+                if(parts.length != 5 && parts.length != 7) {
                     System.out.println("Error: Invalid data.\n"
                             + "Skipping line " + lineNum);
                     continue;
                 }
                 
-                transactions.add(new Transaction(
+                // TRANSFER type
+                if (parts[2].equalsIgnoreCase(TransactionType.TRANSFER.toString())) {
+                    transactions.add(new Transfer(
+                            parts[0],   // accNum
+                            parts[1],   // ID
+                            Double.parseDouble(parts[3]), // amount
+                            LocalDateTime.parse(parts[4], Utils.yyyy_MM_dd),  // dateTime
+                            parts[5],    // recipient account num
+                            Boolean.parseBoolean(parts[6])
+                    ));
+                // DEPOSIT/WITHDRAW
+                } else {
+                    transactions.add(new Transaction(
                         parts[0],   // accNum
                         parts[1],   // ID
                         TransactionType.valueOf(parts[2]),   // type
                         Double.parseDouble(parts[3]), // amount
                         LocalDateTime.parse(parts[4], Utils.yyyy_MM_dd)  // dateTime
-                    )
-                );
+                        )   
+                    );
+                }
             }
         } catch(IOException e) {
             throw new IOException("Error: Failed to load all transactions in path: " + filePath);
@@ -102,8 +122,16 @@ public class TransactionsRepository {
         ArrayList<Transaction> userTransactions = new ArrayList<>();
         
         for (Transaction transaction : loadAllTransactions()) {
-            if(accNum.equals(transaction.accNum)) {
+            if (accNum.equals(transaction.accNum)) {
                 userTransactions.add(transaction);
+            }
+            
+            // Handle transfer
+            if (transaction instanceof Transfer) {
+                Transfer transfer = (Transfer) transaction;
+                if (accNum.equals(transfer.recipientNum)) {
+                    userTransactions.add(transaction);
+                }
             }
         }
         

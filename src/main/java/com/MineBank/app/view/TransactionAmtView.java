@@ -4,12 +4,12 @@
  */
 package com.MineBank.app.view;
 
+import com.MineBank.app.Enums.TransactionType;
 import com.MineBank.app.model.User;
+import com.MineBank.app.utils.Utils;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
@@ -17,23 +17,23 @@ import javax.swing.JTextField;
  *
  * @author giann
  */
-public class DepositView extends javax.swing.JFrame {
+public class TransactionAmtView extends javax.swing.JFrame {
+    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TransactionAmtView.class.getName());
 
+    
     /**
-     * Creates new form DepositView
+     * Creates new form TransactionAmtView
      */
-    public DepositView() {
+    
+    private TransactionType type;
+    
+    public TransactionAmtView(TransactionType type) {
+        this.type = type;
         initComponents();
+        renderTransactionType();
         processInput();
         setIconImage(new ImageIcon(DisplaysUtils.programIcon).getImage());
-        
-//        addWindowListener(new WindowAdapter() {
-//            @Override
-//            public void windowClosing(WindowEvent e) {
-//                dashboard.setVisible(true);
-//                dispose();
-//            }
-//        });
     }
 
     /**
@@ -45,34 +45,30 @@ public class DepositView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        trnTypeHeader = new javax.swing.JLabel();
         amountField = new javax.swing.JTextField();
         accNumLabel = new javax.swing.JLabel();
         balanceLabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        depositBtn = new javax.swing.JButton();
+        trnTypeButton = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
         invalidNumLabel = new javax.swing.JLabel();
 
-        jLabel2.setText("jLabel2");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Deposit");
-        setResizable(false);
+        setTitle("Withdraw");
 
         jPanel1.setBackground(new java.awt.Color(255, 250, 239));
         jPanel1.setPreferredSize(new java.awt.Dimension(460, 520));
 
-        jLabel1.setBackground(new java.awt.Color(29, 126, 190));
-        jLabel1.setFont(new java.awt.Font("minecrafter", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/money-bag-36px.png"))); // NOI18N
-        jLabel1.setText("DEPOSIT");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        trnTypeHeader.setBackground(new java.awt.Color(29, 126, 190));
+        trnTypeHeader.setFont(new java.awt.Font("minecrafter", 0, 36)); // NOI18N
+        trnTypeHeader.setForeground(new java.awt.Color(0, 0, 0));
+        trnTypeHeader.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        trnTypeHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/income-36px.png"))); // NOI18N
+        trnTypeHeader.setText("Transaction");
+        trnTypeHeader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         amountField.setBackground(new java.awt.Color(255, 250, 239));
         amountField.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
@@ -101,14 +97,14 @@ public class DepositView extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(91, 91, 91));
         jLabel5.setText("Amount:");
 
-        depositBtn.setBackground(new java.awt.Color(204, 213, 174));
-        depositBtn.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
-        depositBtn.setForeground(new java.awt.Color(30, 30, 30));
-        depositBtn.setText("Deposit");
-        depositBtn.setMargin(new java.awt.Insets(6, 14, 3, 14));
-        depositBtn.addActionListener(new java.awt.event.ActionListener() {
+        trnTypeButton.setBackground(new java.awt.Color(204, 213, 174));
+        trnTypeButton.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
+        trnTypeButton.setForeground(new java.awt.Color(30, 30, 30));
+        trnTypeButton.setText("Type");
+        trnTypeButton.setMargin(new java.awt.Insets(6, 14, 3, 14));
+        trnTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                depositBtnActionPerformed(evt);
+                trnTypeButtonActionPerformed(evt);
             }
         });
 
@@ -133,33 +129,31 @@ public class DepositView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(invalidNumLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(accNumLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(balanceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(accNumLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(balanceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(amountField)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(amountField)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                                .addComponent(depositBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 191, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(19, Short.MAX_VALUE))))
+                                        .addComponent(trnTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 191, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(trnTypeHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(invalidNumLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jLabel1)
+                .addComponent(trnTypeHeader)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(accNumLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -170,13 +164,13 @@ public class DepositView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(amountField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(invalidNumLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(depositBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(trnTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -194,17 +188,32 @@ public class DepositView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void amountFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amountFieldActionPerformed
-        depositBtn.doClick();
+        trnTypeButton.doClick();
     }//GEN-LAST:event_amountFieldActionPerformed
 
-    private void depositBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositBtnActionPerformed
+    private void trnTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trnTypeButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_depositBtnActionPerformed
+    }//GEN-LAST:event_trnTypeButtonActionPerformed
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelBtnActionPerformed
 
+    
+    private void renderTransactionType() {
+        String trnTypeStr = Utils.toProperCase(type.name());
+        trnTypeHeader.setText(trnTypeStr);
+        trnTypeButton.setText(trnTypeStr);
+    }
+    
+    public void setTransactionBtnAction(ActionListener listener) {
+        trnTypeButton.addActionListener(listener);
+    }
+    
+    public void setCancelBtnAction(ActionListener listener) {
+        cancelBtn.addActionListener(listener);
+    }
+    
     // block non-number cgaracters
     private void processInput() {
         invalidNumLabel.setVisible(false);
@@ -232,69 +241,29 @@ public class DepositView extends javax.swing.JFrame {
         });
     }
     
-    public String getInputAmountStr() {
-        return amountField.getText().trim();
-    }
-    
-    public void setDepositBtnAction (ActionListener listener) {
-        depositBtn.addActionListener(listener);
-    }
-    
-    public void setCancelBtnAction (ActionListener listener) {
-        cancelBtn.addActionListener(listener);
-    }
-    
     public void renderUserInfo(User user) {
         accNumLabel.setText("Account Number: " + user.getAccNum());
         balanceLabel.setText("Balance: " + DisplaysUtils.formatNumber(user.getBalance()) + " emeralds");
     }
     
-    /**8
+    public String getInputAmountStr() {
+        return amountField.getText().trim();
+    }
+    
+    /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DepositView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DepositView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DepositView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DepositView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DepositView().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel accNumLabel;
     private javax.swing.JTextField amountField;
     private javax.swing.JLabel balanceLabel;
     private javax.swing.JButton cancelBtn;
-    private javax.swing.JButton depositBtn;
     private javax.swing.JLabel invalidNumLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton trnTypeButton;
+    private javax.swing.JLabel trnTypeHeader;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,7 +12,7 @@ import com.MineBank.app.repository.UserRepository;
 import com.MineBank.app.service.TransactionsService;
 import com.MineBank.app.view.DisplaysUtils;
 import com.MineBank.app.view.ReceiptModal;
-import com.MineBank.app.view.WithdrawView;
+import com.MineBank.app.view.TransactionAmtView;
 import java.awt.DisplayMode;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -26,7 +26,7 @@ import javax.swing.JDialog;
  */
 public class WithdrawController {
     User user;
-    WithdrawView view;
+    TransactionAmtView view;
     UserRepository repo;
     
     private String amountStr;
@@ -35,7 +35,7 @@ public class WithdrawController {
     private double newBalance;
     private Transaction transaction;
 
-    public WithdrawController(User user, WithdrawView view, UserRepository repo) {
+    public WithdrawController(User user, TransactionAmtView view, UserRepository repo) {
         this.user = user;
         this.view = view;
         this.repo = repo;
@@ -49,8 +49,8 @@ public class WithdrawController {
     }
     
     private void withdraw() {
-        view.setWithdrawBtnAction(e -> {
-            if(!isValid()) return;
+        view.setTransactionBtnAction(e -> {
+            if(!isValidAmt()) return;
             
             updateBalance();
             saveTransaction();
@@ -86,7 +86,7 @@ public class WithdrawController {
         }
     }
     
-    private boolean isValid() {
+    private boolean isValidAmt() {
         amountStr = view.getInputAmountStr();
         try {
             amount = Double.parseDouble(amountStr);

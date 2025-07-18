@@ -21,7 +21,7 @@ import com.MineBank.app.Enums.*;
  */
 public class DepositController {
     public User user;
-    public DepositView view;
+    public TransactionAmtView view;
     public UserRepository repo;
     
     private String amountStr;
@@ -29,7 +29,7 @@ public class DepositController {
     private double newBalance;
     private Transaction transaction;
 
-    public DepositController(User user, DepositView view, UserRepository repo) {
+    public DepositController(User user, TransactionAmtView view, UserRepository repo) {
         this.user = user;
         this.view = view;
         this.repo = repo;
@@ -42,7 +42,7 @@ public class DepositController {
     }
     
     private void deposit() {
-        view.setDepositBtnAction(e -> {
+        view.setTransactionBtnAction(e -> {
             updateBalance();
             createTransaction();
         });

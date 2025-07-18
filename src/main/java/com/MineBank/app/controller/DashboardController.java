@@ -4,6 +4,7 @@
  */
 package com.MineBank.app.controller;
 
+import com.MineBank.app.Enums.TransactionType;
 import com.MineBank.app.exceptions.*;
 import com.MineBank.app.model.*;
 import com.MineBank.app.repository.*;
@@ -68,8 +69,23 @@ public class DashboardController {
     }
 
     private void showMoneyTransferFrame() {
+        view.setAllButtonsEnabled(false);
+        
         TransferView tfView = new TransferView();
+        tfView.setLocationRelativeTo(view);
+        
         TransferController tfController = new TransferController(user, tfView, repo);
+        
+        tfView.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                view.setVisible(true);
+                view.setAllButtonsEnabled(true);
+                updateUserInfo(tfController.user);
+            }
+        });
+        
+        view.setVisible(false);
         tfController.init();
     }
 
@@ -77,7 +93,7 @@ public class DashboardController {
         // prevents spamming
         view.setAllButtonsEnabled(false);
 
-        DepositView depositView = new DepositView();
+        TransactionAmtView depositView = new TransactionAmtView(TransactionType.DEPOSIT);
         depositView.setLocationRelativeTo(view);
 
         DepositController depositController = new DepositController(user, depositView, repo);
@@ -100,7 +116,7 @@ public class DashboardController {
         // prevents spamming
         view.setAllButtonsEnabled(false);
 
-        WithdrawView withdrawView = new WithdrawView();
+        TransactionAmtView withdrawView = new TransactionAmtView(TransactionType.WITHDRAW);
         withdrawView.setLocationRelativeTo(view);
 
         WithdrawController withdrawController = new WithdrawController(user, withdrawView, repo);

@@ -4,6 +4,10 @@
  */
 package com.MineBank.app.view;
 
+import com.MineBank.app.model.User;
+import com.MineBank.app.utils.Utils;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author giann
@@ -15,8 +19,15 @@ public class ConfirmTransferView extends javax.swing.JFrame {
     /**
      * Creates new form TransferView2
      */
-    public ConfirmTransferView() {
+    
+    private User recipient;
+    private double amount;
+    
+    public ConfirmTransferView(User recipient, double amount) {
+        this.recipient = recipient;
+        this.amount = amount;
         initComponents();
+        renderInfo();
     }
 
     /**
@@ -29,29 +40,159 @@ public class ConfirmTransferView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLayeredPane2 = new javax.swing.JLayeredPane();
         jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        recipientLabel = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        recipientAccNumLabel = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        transferAmtLabel = new javax.swing.JLabel();
+        confirmBtn = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
+        ptCheckBox = new javax.swing.JCheckBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(227, 234, 236));
+        jPanel1.setBackground(new java.awt.Color(222, 227, 232));
+        jPanel1.setToolTipText("");
 
-        jLabel1.setFont(new java.awt.Font("minecrafter", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Emerald Transfer");
+        jLayeredPane2.setBackground(new java.awt.Color(189, 189, 189));
+        jLayeredPane2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/3_(8)_80px.jpg"))); // NOI18N
+        jLayeredPane2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 30, 80, 80));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setBackground(new java.awt.Color(2, 2, 2));
+        jLabel2.setFont(new java.awt.Font("Minecraft Ten", 0, 22)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Confirm Transfer?");
+
+        jLabel3.setFont(new java.awt.Font("Minecraft", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(75, 75, 75));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Receipient");
+
+        recipientLabel.setFont(new java.awt.Font("Minecraft", 0, 18)); // NOI18N
+        recipientLabel.setForeground(new java.awt.Color(36, 95, 185));
+        recipientLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        recipientLabel.setText("<null>");
+
+        jLabel5.setFont(new java.awt.Font("Minecraft", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(75, 75, 75));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Account Number");
+
+        recipientAccNumLabel.setFont(new java.awt.Font("Minecraft", 0, 18)); // NOI18N
+        recipientAccNumLabel.setForeground(new java.awt.Color(36, 95, 185));
+        recipientAccNumLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        recipientAccNumLabel.setText("<null>");
+
+        jLabel7.setFont(new java.awt.Font("Minecraft", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(75, 75, 75));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Amount");
+
+        transferAmtLabel.setFont(new java.awt.Font("Minecraft", 0, 18)); // NOI18N
+        transferAmtLabel.setForeground(new java.awt.Color(36, 95, 185));
+        transferAmtLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        transferAmtLabel.setText("<null>");
+
+        confirmBtn.setBackground(new java.awt.Color(204, 213, 174));
+        confirmBtn.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
+        confirmBtn.setForeground(new java.awt.Color(0, 0, 0));
+        confirmBtn.setText("Confirm");
+        confirmBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmBtnActionPerformed(evt);
+            }
+        });
+
+        cancelBtn.setBackground(new java.awt.Color(172, 172, 172));
+        cancelBtn.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(0, 0, 0));
+        cancelBtn.setText("Cancel");
+
+        ptCheckBox.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
+        ptCheckBox.setForeground(new java.awt.Color(102, 102, 102));
+        ptCheckBox.setText("Protect Transfer ( Additional EMD 20 )");
+        ptCheckBox.setContentAreaFilled(false);
+        ptCheckBox.setFocusable(false);
+        ptCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ptCheckBoxActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(recipientLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(recipientAccNumLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(transferAmtLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cancelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                    .addComponent(confirmBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(ptCheckBox)))
+                .addGap(18, 18, 18))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(recipientLabel)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(recipientAccNumLabel)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(transferAmtLabel)
+                .addGap(18, 18, 18)
+                .addComponent(ptCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+        );
+
+        jLayeredPane2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 330, 450));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+            .addComponent(jLayeredPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(455, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLayeredPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -62,39 +203,48 @@ public class ConfirmTransferView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void ptCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ptCheckBoxActionPerformed
+        
+    }//GEN-LAST:event_ptCheckBoxActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ConfirmTransferView().setVisible(true));
+    private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmBtnActionPerformed
+
+    public void setConfirmBtnAction(ActionListener listener) {
+        confirmBtn.addActionListener(listener);
+    }
+    
+    public void setCancelBtnAction(ActionListener listener) {
+        cancelBtn.addActionListener(listener);
+    }
+    
+    private void renderInfo() {
+        recipientLabel.setText(recipient.getFullName());
+        recipientAccNumLabel.setText(recipient.getAccNum());
+        transferAmtLabel.setText("EMD " + amount);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelBtn;
+    private javax.swing.JButton confirmBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JCheckBox ptCheckBox;
+    private javax.swing.JLabel recipientAccNumLabel;
+    private javax.swing.JLabel recipientLabel;
+    private javax.swing.JLabel transferAmtLabel;
     // End of variables declaration//GEN-END:variables
 }

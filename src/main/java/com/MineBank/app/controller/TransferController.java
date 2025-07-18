@@ -4,56 +4,162 @@
  */
 package com.MineBank.app.controller;
 
+import com.MineBank.app.Enums.TransactionType;
+import com.MineBank.app.model.Transaction;
+import com.MineBank.app.model.Transfer;
 import com.MineBank.app.model.User;
+import com.MineBank.app.repository.TransactionsRepository;
 import com.MineBank.app.repository.UserRepository;
+import com.MineBank.app.service.TransactionsService;
 import com.MineBank.app.view.ConfirmTransferView;
 import com.MineBank.app.view.DisplaysUtils;
+import com.MineBank.app.view.ReceiptModal;
+import com.MineBank.app.view.TransactionAmtView;
 import com.MineBank.app.view.TransferView;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import jdk.javadoc.doclet.Reporter;
-
 /**
  *
  * @author giann
  */
 public class TransferController {
     User user;
-    TransferView view;
+    TransferView recipientView;
     UserRepository userRepo;
     
     private ArrayList<User> usersList;
-    private User receipient;
+    private User recipient;
+    private double transferAmt;
     
-    public TransferController(User user, TransferView view, UserRepository userRepo) {
+    private TransactionAmtView amountView;
+    private ConfirmTransferView ctView;
+    
+    public TransferController(User user, TransferView recipientView, UserRepository userRepo) {
         this.user = user;
-        this.view = view;
+        this.recipientView = recipientView;
         this.userRepo = userRepo;
     }
     
     public void init() {
         usersList = userRepo.loadUsers();
-        view.checkInput(this);
-        view.setTransferBtnAction(e -> transfer());
-        view.setCancelBtnAction(e -> {
-            view.dispose();
+        recipientView.checkInput(this);
+        
+        recipientView.setTransferBtnAction(e -> transfer());
+        
+        recipientView.setCancelBtnAction(e -> {
+            recipientView.dispose();
         });
-        view.setVisible(true);
+        recipientView.setVisible(true);
     }
     
     private void transfer() {
-        receipient = validateAccount(view.getInputFieldVal());
+        recipient = validateAccount(recipientView.getInputFieldVal());
         
-        if(receipient == null) {
-            view.showUserNotFound();
+        if(recipient == null) {
+            recipientView.showUserNotFound();
             return;
         }
         
-        confirmTransfer();
+        recipientView.setVisible(false);
+        openAmountInput();
+    }
+    
+    private void openAmountInput() {
+        amountView = new TransactionAmtView(TransactionType.TRANSFER);
+        amountView.renderUserInfo(user);
+        amountView.setLocationRelativeTo(recipientView);
+        
+        amountView.setTransactionBtnAction(e -> {
+            Double amt = Double.parseDouble(amountView.getInputAmountStr());
+            
+            if (!validateAmount(amt)) {
+                return;
+            }
+            
+            this.transferAmt = amt;
+            recipientView.setVisible(false);
+            amountView.setVisible(false);
+            
+            ctView = new ConfirmTransferView(recipient, transferAmt);
+            ctView.setLocationRelativeTo(amountView);
+            amountView.dispose();
+            confirmTransfer();
+            
+        });
+        
+        amountView.setCancelBtnAction(e -> {
+            amountView.dispose();
+            recipientView.setVisible(true);
+        });
+        
+        amountView.setVisible(true);
     }
     
     private void confirmTransfer() {
-        ConfirmTransferView ctView = new ConfirmTransferView();
+        ctView.setConfirmBtnAction(e -> {
+            double userNewBalance = user.getBalance() - transferAmt;
+            user.setBalance(userNewBalance);
+            userRepo.updateUser(user);
+            
+            double recipientNewBalance = recipient.getBalance() + transferAmt;
+            recipient.setBalance(recipientNewBalance);
+            userRepo.updateUser(recipient);
+            
+            TransactionsRepository trRepo = new TransactionsRepository();
+            Transaction senderTrn = null;
+            
+            try {
+                // sender
+                senderTrn = new Transfer(
+                    user.getAccNum(),   // accNum
+                    TransactionsService.generateTransactionID(TransactionType.TRANSFER),
+                    transferAmt,
+                    LocalDateTime.now(),
+                    recipient.getAccNum(),
+                    true
+                );
+                
+                trRepo.saveTransaction(senderTrn);
+                
+            } catch (IOException ie) {
+                System.out.println("Error in saving transfer transaction");
+            }
+            
+            createReceipt(senderTrn);
+            
+        });
         
+    }
+    
+    private void createReceipt(Transaction transaction) {
+        ReceiptModal receipt = new ReceiptModal(ctView, true);
+        ctView.setVisible(false);
+        
+        receipt.setHomeBtnAction(e -> {
+            receipt.dispose();
+            disposeAll();
+        });
+        
+        receipt.showReceipt(transaction);
+        
+        
+        receipt.setDefaultCloseOperation(receipt.DO_NOTHING_ON_CLOSE);
+        receipt.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                receipt.dispose();
+                disposeAll();
+            }
+        });
+    }
+    
+    private void disposeAll() {
+        ctView.dispose();
+        amountView.dispose();
+        recipientView.dispose();
     }
     
     public User validateAccount(String accNum) {
@@ -68,4 +174,16 @@ public class TransferController {
         return null;
     }
     
+    
+    private boolean validateAmount(Double amount) {  
+        if (amount <= 0) {
+            DisplaysUtils.showError("Amount cannot be 0 or less!");
+            return false;
+        } else if (amount > user.getBalance()) {
+            DisplaysUtils.showError("Insufficient Balance!");
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

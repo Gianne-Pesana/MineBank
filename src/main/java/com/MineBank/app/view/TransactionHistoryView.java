@@ -4,7 +4,9 @@
  */
 package com.MineBank.app.view;
 
+import com.MineBank.app.Enums.TransactionType;
 import com.MineBank.app.model.Transaction;
+import com.MineBank.app.model.Transfer;
 import com.MineBank.app.utils.Utils;
 import java.awt.Color;
 import java.awt.Component;
@@ -159,17 +161,46 @@ public class TransactionHistoryView extends javax.swing.JFrame {
         for (Transaction t : list) {
             model.addRow(new Object[] {
                     t.getID(),
-                    t.getType().name(),
-                    formatAmount(t.getAmount()),
+                    formatType(t),
+                    formatAmount(t.getAmount(), t),
                     formatDateTime(t.getDateTime())
             });
         }
     }
     
-    private String formatAmount(double amount) {
-        return "EMD " + DisplaysUtils.formatNumber(amount);
+    private String formatType(Transaction transaction) {
+        String type = transaction.getTypeStr();
+        
+        if (transaction instanceof Transfer) {
+            Transfer transfer = (Transfer) transaction;
+            String postFix = 
+                    transfer.isSender ? 
+                    "to: " + transfer.recipientNum : 
+                    "from: " + transfer.accNum;
+            
+            return type + " " + postFix;
+        }
+        
+        return type;
     }
     
+    private String formatAmount(double amount, Transaction t) {
+        return getOperator(t) + " EMD " + DisplaysUtils.formatNumber(amount);
+    }
+    
+    private char getOperator(Transaction transaction) {
+        if (transaction instanceof Transfer) {
+            Transfer transfer = (Transfer) transaction;
+            return transfer.isSender ? '-' : '+';
+        }
+
+        return switch (transaction.type) {
+            case DEPOSIT -> '+';
+            case WITHDRAW -> '-';
+            default -> '?';
+        };
+    }
+
     private String formatDateTime(LocalDateTime ldt) {
         DateTimeFormatter formatter = Utils.MMMM_dd_yy;
         return ldt.format(formatter);

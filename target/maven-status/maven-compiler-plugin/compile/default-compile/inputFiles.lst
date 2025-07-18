@@ -9,6 +9,7 @@ C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\m
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\exceptions\AuthenticationException.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\Main.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\model\Transaction.java
+C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\model\Transfer.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\model\User.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\repository\TransactionsRepository.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\repository\UserRepository.java
@@ -17,12 +18,11 @@ C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\m
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\service\UserService.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\utils\SessionManager.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\utils\Utils.java
+C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\ConfirmTransferView.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\DashboardView.java
-C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\DepositView.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\DisplaysUtils.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\LoginView.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\ReceiptModal.java
+C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\TransactionAmtView.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\TransactionHistoryView.java
 C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\TransferView.java
-C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\TransferView2.java
-C:\Users\giann\Documents\Programming Stuff\Java Personal Projects\MineBank\src\main\java\com\MineBank\app\view\WithdrawView.java

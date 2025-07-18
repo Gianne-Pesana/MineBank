@@ -50,7 +50,7 @@ public class TransferView extends javax.swing.JFrame {
         cancelBtn = new javax.swing.JButton();
         findStatus = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(227, 234, 236));
 
@@ -268,6 +268,19 @@ public class TransferView extends javax.swing.JFrame {
                     displayFoundStatus(notFound);
                 }
             }
+            
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                
+                if (!Character.isDigit(c)) {
+                    e.consume();
+                }
+                
+                if (inputField.getText().trim().length() >= 6) {
+                    e.consume();
+                }
+            }
         });
     }
     
@@ -277,6 +290,15 @@ public class TransferView extends javax.swing.JFrame {
     
     public String getInputFieldVal() {
         return inputField.getText().trim();
+    }
+    
+    public static boolean isNumeric(String str) { 
+        try {  
+          Double.parseDouble(str);  
+          return true;
+        } catch(NumberFormatException e){  
+          return false;  
+        }  
     }
     
     /**
