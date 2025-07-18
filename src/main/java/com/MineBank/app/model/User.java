@@ -31,7 +31,7 @@ public class User {
         this.age = age;
         this.balance = balance;
         this.status = status;
-        this.profileImage = "src\\main\\resources\\icons\\default_profile_90px.jpg";
+        this.profileImage = "/icons/profile/Villager-Default3-90px.png";
     }
 
     public User(String accNum, String username, String password, String firstName, String lastName, int age, double balance, UserAccStatus status, String profileImage) {

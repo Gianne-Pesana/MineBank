@@ -1,5 +1,6 @@
 com\MineBank\app\view\TransactionAmtView$4.class
 com\MineBank\app\model\Transfer.class
+com\MineBank\app\controller\TransferController$3.class
 com\MineBank\app\exceptions\AuthenticationException.class
 com\MineBank\app\view\ReceiptModal$1.class
 com\MineBank\app\controller\TransferController.class
@@ -52,6 +53,7 @@ com\MineBank\app\view\DashboardView$5.class
 com\MineBank\app\controller\DashboardController$3.class
 com\MineBank\app\controller\TransferController$1.class
 com\MineBank\app\view\TransactionHistoryView.class
+com\MineBank\app\controller\TransferController$2.class
 com\MineBank\app\utils\SessionManager.class
 com\MineBank\app\view\TransactionAmtView.class
 com\MineBank\app\view\TransactionHistoryView$5.class

@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.URL;
 import javax.swing.*;
 
 /**
@@ -313,10 +314,25 @@ public class DashboardView extends javax.swing.JFrame {
         accNumLabel.setText(user.getAccNum());
         balanceLabel.setText(DisplaysUtils.formatAmount(user.getBalance()) + " emeralds");
         
-        Image scaledImage = new ImageIcon(user.getProfileImage()).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-        ImageIcon profileImage = new ImageIcon(scaledImage);
-        profilePicture.setIcon(profileImage);
+        ImageIcon profileImage = getScaledProfileImage(user.getProfileImage(), 90, 90);
+        if (profileImage != null) {
+            profilePicture.setIcon(profileImage);
+        } else {
+            System.err.println("Failed to load profile image: " + user.getProfileImage());
+        }
     }
+    
+    private ImageIcon getScaledProfileImage(String resourcePath, int width, int height) {
+        URL resource = getClass().getResource(resourcePath);
+        if (resource == null) {
+            return null; // image not found
+        }
+
+        ImageIcon originalIcon = new ImageIcon(resource);
+        Image scaledImage = originalIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(scaledImage);
+    }
+
     
     public void setTransactionHistoryBtnAction(ActionListener listener) {
         transactionHistoryBtn.addActionListener(listener);

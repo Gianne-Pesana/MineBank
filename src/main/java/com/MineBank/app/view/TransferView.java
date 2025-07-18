@@ -11,6 +11,7 @@ import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 import javax.swing.ImageIcon;
 
 /**
@@ -217,60 +218,53 @@ public class TransferView extends javax.swing.JFrame {
     
     
     public void displayFoundStatus(int status) {
-        Image scaledImage;
-        boolean isVisible = false;
         int scale = 12;
-        String path = "";
+        boolean isVisible = true;
+
         switch (status) {
             case found -> {
-                scaledImage = new ImageIcon("src\\main\\resources\\icons\\transferView\\verified-16px.png")
-                            .getImage()
-                            .getScaledInstance(scale, scale, Image.SCALE_SMOOTH);
-                findStatus.setIcon(new ImageIcon(scaledImage));
+                findStatus.setIcon(loadAndScaleIcon("/icons/transferView/verified-16px.png", scale, scale));
                 findStatus.setText("Account Found");
-                findStatus.setForeground(new Color(32,125,18));
-                isVisible = true;
+                findStatus.setForeground(new Color(32, 125, 18));
             }
             case loading -> {
-//                path = "src\\main\\resources\\icons\\transferView\\BlocksLoad3-16px.gif";
-                scaledImage = null;
                 findStatus.setIcon(null);
                 findStatus.setText(
-                        "<html>"
-                        + "<img src='file:src\\main\\resources\\icons\\transferView\\BlocksLoad3-16px.gif' "
-                        + "width='12' height='12'>"
-                       +"</html>");
-                isVisible = true;
+                    "<html><img src='file:src/main/resources/icons/transferView/BlocksLoad3-16px.gif' " +
+                    "width='" + scale + "' height='" + scale + "'></html>");
             }
-            
             case notFound -> {
-                scaledImage = new ImageIcon("src\\main\\resources\\icons\\transferView\\error-16px.png")
-                            .getImage()
-                            .getScaledInstance(scale, scale, Image.SCALE_SMOOTH);
-                findStatus.setIcon(new ImageIcon(scaledImage));
+                findStatus.setIcon(loadAndScaleIcon("/icons/transferView/error-16px.png", scale, scale));
                 findStatus.setText("Account not found!");
                 findStatus.setForeground(Color.red);
-                isVisible = true;
             }
             case toSelf -> {
-                scaledImage = new ImageIcon("src\\main\\resources\\icons\\transferView\\error-16px.png")
-                            .getImage()
-                            .getScaledInstance(scale, scale, Image.SCALE_SMOOTH);
-                findStatus.setIcon(new ImageIcon(scaledImage));
+                findStatus.setIcon(loadAndScaleIcon("/icons/transferView/error-16px.png", scale, scale));
                 findStatus.setText("Cannot transfer to yourself!");
                 findStatus.setForeground(Color.red);
-                isVisible = true;
             }
             default -> {
-                scaledImage = null;
+                findStatus.setIcon(null);
                 findStatus.setText("");
                 isVisible = false;
             }
         }
-        
+
         findStatus.setVisible(isVisible);
-        
     }
+    
+    private ImageIcon loadAndScaleIcon(String resourcePath, int width, int height) {
+        URL resourceURL = getClass().getResource(resourcePath);
+        if (resourceURL == null) {
+            System.err.println("Resource not found: " + resourcePath);
+            return null;
+        }
+        ImageIcon icon = new ImageIcon(resourceURL);
+        Image scaled = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(scaled);
+    }
+
+
     
     public void setTransferBtnAction(ActionListener listener) {
         transferBtn.addActionListener(listener);

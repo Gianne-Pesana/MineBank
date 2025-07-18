@@ -93,7 +93,13 @@ public class TransferController {
         
         amountView.setCancelBtnAction(e -> {
             amountView.dispose();
-            recipientView.setVisible(true);
+        });
+        
+        amountView.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                recipientView.setVisible(true);
+            }
         });
         
         amountView.setVisible(true);
@@ -103,8 +109,15 @@ public class TransferController {
         ctView.setConfirmBtnAction(e -> processTransfer());
         ctView.setCancelBtnAction(e -> {
             ctView.dispose();
-            amountView.setVisible(true);
         });
+        
+        ctView.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                amountView.setVisible(true);
+            }
+        });
+        
         ctView.setVisible(true);
     }
     
