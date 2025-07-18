@@ -24,8 +24,11 @@ public class ReceiptModal extends javax.swing.JDialog {
     /**
      * Creates new form ReceiptModal
      */
+    private double fees;
+    
     public ReceiptModal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.fees = 0;
         initComponents();
         renderConfirmIcon();
         setLocationRelativeTo(parent);
@@ -65,6 +68,9 @@ public class ReceiptModal extends javax.swing.JDialog {
         dateTimeText2 = new javax.swing.JPanel();
         transactionIDText3 = new javax.swing.JLabel();
         transactionTypeValue = new javax.swing.JLabel();
+        dateTimeText3 = new javax.swing.JPanel();
+        transactionIDText4 = new javax.swing.JLabel();
+        addtnlFeesLabel = new javax.swing.JLabel();
         homeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -216,7 +222,7 @@ public class ReceiptModal extends javax.swing.JDialog {
         dateTimeText1.setBackground(new java.awt.Color(255, 255, 255));
 
         transactionIDText2.setBackground(new java.awt.Color(255, 255, 255));
-        transactionIDText2.setFont(new java.awt.Font("Minecraft", 0, 14)); // NOI18N
+        transactionIDText2.setFont(new java.awt.Font("Minecraft", 0, 16)); // NOI18N
         transactionIDText2.setForeground(new java.awt.Color(72, 72, 72));
         transactionIDText2.setText("Total");
 
@@ -275,6 +281,37 @@ public class ReceiptModal extends javax.swing.JDialog {
                 .addGap(0, 0, 0))
         );
 
+        dateTimeText3.setBackground(new java.awt.Color(255, 255, 255));
+
+        transactionIDText4.setBackground(new java.awt.Color(255, 255, 255));
+        transactionIDText4.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
+        transactionIDText4.setForeground(new java.awt.Color(72, 72, 72));
+        transactionIDText4.setText("Additional Fees");
+
+        addtnlFeesLabel.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
+        addtnlFeesLabel.setForeground(new java.awt.Color(0, 0, 0));
+        addtnlFeesLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        addtnlFeesLabel.setText("<null>");
+
+        javax.swing.GroupLayout dateTimeText3Layout = new javax.swing.GroupLayout(dateTimeText3);
+        dateTimeText3.setLayout(dateTimeText3Layout);
+        dateTimeText3Layout.setHorizontalGroup(
+            dateTimeText3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dateTimeText3Layout.createSequentialGroup()
+                .addComponent(transactionIDText4, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(addtnlFeesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        dateTimeText3Layout.setVerticalGroup(
+            dateTimeText3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dateTimeText3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(dateTimeText3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(transactionIDText4)
+                    .addComponent(addtnlFeesLabel))
+                .addGap(0, 0, 0))
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -288,7 +325,8 @@ public class ReceiptModal extends javax.swing.JDialog {
                     .addComponent(dateTimeText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(dateTimeText1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
-                    .addComponent(dateTimeText2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(dateTimeText2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dateTimeText3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(17, 17, 17))
         );
         jPanel3Layout.setVerticalGroup(
@@ -300,15 +338,17 @@ public class ReceiptModal extends javax.swing.JDialog {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(dateTimeText2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(dateTimeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dateTimeText3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(dateTimeText1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(24, 24, 24))
         );
 
         homeButton.setBackground(new java.awt.Color(204, 213, 174));
@@ -340,7 +380,7 @@ public class ReceiptModal extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
@@ -365,13 +405,20 @@ public class ReceiptModal extends javax.swing.JDialog {
     
     public void showReceipt(Transaction transaction) {        
         transactionHeader.setText(Utils.toProperCase(transaction.getTypeStr()) + " Success!");
+        
         depositAmountHeader.setText("EMD " + DisplaysUtils.formatAmount(transaction.getAmount()));
         accNumValue.setText(transaction.getAccNum());
         transactionIDValue.setText(transaction.getID());
         transactionTypeValue.setText(Utils.toProperCase(transaction.getTypeStr()));
         dateTimeValue.setText(transaction.dateTime.format(Utils.MMMM_dd_yy));
-        depositAmountFooter.setText(DisplaysUtils.formatAmount(transaction.getAmount()));
+        
+        addtnlFeesLabel.setText(DisplaysUtils.formatAmount(this.fees));
+        depositAmountFooter.setText(DisplaysUtils.formatAmount(transaction.getAmount() + this.fees));
         setVisible(true);
+    }
+    
+    public void addFee(double feeAmount) {
+        this.fees += feeAmount;
     }
     
     private void renderConfirmIcon() {
@@ -428,10 +475,12 @@ public class ReceiptModal extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel accNumText;
     private javax.swing.JLabel accNumValue;
+    private javax.swing.JLabel addtnlFeesLabel;
     private javax.swing.JLabel confirmedIcon;
     private javax.swing.JPanel dateTimeText;
     private javax.swing.JPanel dateTimeText1;
     private javax.swing.JPanel dateTimeText2;
+    private javax.swing.JPanel dateTimeText3;
     private javax.swing.JLabel dateTimeValue;
     private javax.swing.JLabel depositAmountFooter;
     private javax.swing.JLabel depositAmountHeader;
@@ -448,6 +497,7 @@ public class ReceiptModal extends javax.swing.JDialog {
     private javax.swing.JLabel transactionIDText1;
     private javax.swing.JLabel transactionIDText2;
     private javax.swing.JLabel transactionIDText3;
+    private javax.swing.JLabel transactionIDText4;
     private javax.swing.JLabel transactionIDValue;
     private javax.swing.JLabel transactionTypeValue;
     // End of variables declaration//GEN-END:variables

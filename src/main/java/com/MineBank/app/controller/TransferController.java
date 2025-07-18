@@ -30,6 +30,8 @@ public class TransferController {
     TransferView recipientView;
     UserRepository userRepo;
     
+    private double protectedTransferFee = 20;
+    
     private ArrayList<User> usersList;
     private User recipient;
     private double transferAmt;
@@ -107,10 +109,10 @@ public class TransferController {
     }
     
     private void processTransfer() {
-        double userNewBalance = user.getBalance() - transferAmt;
         if (ctView.isProtectedTranfer()) {
-            userNewBalance -= 20;
+            transferAmt += protectedTransferFee;
         }
+        double userNewBalance = user.getBalance() - transferAmt;
         
         user.setBalance(userNewBalance);
         userRepo.updateUser(user);
@@ -156,6 +158,9 @@ public class TransferController {
     
     private void createReceipt(Transaction transaction) {
         ReceiptModal receipt = new ReceiptModal(ctView, true);
+        if (ctView.isProtectedTranfer()) {
+            receipt.addFee(protectedTransferFee);
+        }
         ctView.setVisible(false);
         
         receipt.setHomeBtnAction(e -> {
@@ -185,7 +190,7 @@ public class TransferController {
     public User validateAccount(String accNum) {
         for(User targetUser : usersList) {
             if(accNum.equals(targetUser.getAccNum()) && !accNum.equals(this.user.getAccNum())) {
-                return user;
+                return targetUser;
             }
         }
         return null;
